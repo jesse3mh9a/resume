@@ -7,6 +7,7 @@
   align-items: center;
   background-color: purple;
   z-index: 89;
+  padding: 0 1rem;
 }
 
 .right-side {
@@ -36,4 +37,23 @@
 .template-select:focus {
   outline: none;
   border: none;
+}
+
+.github-icon-wrap {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.github-icon-wrap:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.github-icon {
+  width: 24px;
+  fill: #fff;
 }

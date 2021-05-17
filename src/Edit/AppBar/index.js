@@ -6,6 +6,8 @@ import classNames from "classnames/bind";
 
 import Templates from "Templates";
 
+import GithubIcon from "icons/Github";
+
 import styles from "./index.module.css";
 
 import editStyles from "../index.module.css";
@@ -58,6 +60,12 @@ const AppBar = ({ setStatePreview, open, setOpen }) => {
               ))}
             </select>
           </div>
+          <a
+            className={cx("github-icon-wrap")}
+            href="https://github.com/jesse3mh9a/resume"
+          >
+            <GithubIcon className={cx("github-icon")} />
+          </a>
         </div>
       </div>
 
