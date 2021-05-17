@@ -12,7 +12,7 @@ import formStyles from "styles/form.module.css";
 const cx = classNames.bind({ ...formStyles, ...styles });
 
 const Experience = () => {
-  const { summary = "" } = useResume();
+  const { summary = "" } = useResume({ demo: false });
 
   const dispatch = useContext(DispatchContext);
 

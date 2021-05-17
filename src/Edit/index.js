@@ -11,6 +11,7 @@ import FullScreenIcon from "icons/FullScreen";
 
 import AppBar from "./AppBar";
 import Nav from "./Nav";
+import Drawer from "./Drawer";
 
 import styles from "./index.module.css";
 
@@ -88,6 +89,7 @@ const Edit = () => {
             <Outlet />
           </div>
           <div className={cx("paper", "preview")}>
+            <Drawer wrapCls={cx("drawer")} />
             <div
               className={cx("full-screen-icon")}
               onClick={() => {

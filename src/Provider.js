@@ -12,7 +12,7 @@ const genKey = createGenId();
 export const storage = new Storage("data");
 
 const init = (value) => {
-  return storage.value || value;
+  return storage.value ? { ...value, ...storage.value } : value;
 };
 
 const initResume = () => ({
@@ -71,6 +71,8 @@ const themes = Templates.reduce((acc, { id, theme }) => {
 
 export const initialState = {
   currentResume: 0,
+
+  enableDemo: false,
 
   resumes: [initResume()],
 

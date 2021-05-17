@@ -33,7 +33,7 @@ const Education = () => {
     setDeleteConfirm(initialDeleteConfirm);
   };
 
-  const { education = [] } = useResume();
+  const { education = [] } = useResume({ demo: false });
 
   const dispatch = useContext(DispatchContext);
 

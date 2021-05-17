@@ -33,7 +33,7 @@ const Experience = () => {
     setDeleteConfirm(initialDeleteConfirm);
   };
 
-  const { experience = [] } = useResume();
+  const { experience = [] } = useResume({ demo: false });
 
   const dispatch = useContext(DispatchContext);
 
