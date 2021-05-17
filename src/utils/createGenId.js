@@ -1,8 +1,14 @@
+import Storage from "utils/storage";
+
+const storage = new Storage("key");
+
 const createGenId = () => {
-  let id = 0;
+  let id = storage.value || 0;
 
   return () => {
     id += 1;
+
+    storage.value = id;
 
     return `${id}`;
   };
