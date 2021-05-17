@@ -61,6 +61,7 @@ const Edit = () => {
   } else if (state.preview) {
     return (
       <div className={cx("full-preview")}>
+        <Drawer persist />
         <Preview />
         <div
           className={cx("close-icon")}

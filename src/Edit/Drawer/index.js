@@ -6,7 +6,7 @@ import { Context, DispatchContext, update } from "Provider";
 
 const cx = classNames.bind(styles);
 
-const Drawer = ({ wrapCls }) => {
+const Drawer = ({ wrapCls, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
   const { enableDemo } = useContext(Context);
@@ -18,7 +18,7 @@ const Drawer = ({ wrapCls }) => {
   };
 
   return (
-    <div className={cx("content", wrapCls, { visible })}>
+    <div className={cx("content", wrapCls, { visible, persist })}>
       <form className={cx("form")}>
         <div className={cx("form-item")}>
           <label className={cx("label")}>preview Demo</label>

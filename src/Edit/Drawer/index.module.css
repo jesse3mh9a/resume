@@ -14,6 +14,12 @@
   transition: 0.3s;
 }
 
+.content.persist {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9;
+}
+
 .content.visible {
   right: -40%;
 }
