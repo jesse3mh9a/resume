@@ -1,0 +1,39 @@
+.wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background-color: purple;
+  z-index: 89;
+}
+
+.right-side {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.space {
+  height: 60px;
+}
+
+.template-choice {
+  margin-right: 1rem;
+}
+
+.template-select {
+  background-color: rgba(255, 255, 255, 0.1);
+  height: 30px;
+  border-radius: 5px;
+  color: #fff;
+  padding: 0 1rem;
+  outline: none;
+  border: none;
+}
+
+.template-select:focus {
+  outline: none;
+  border: none;
+}

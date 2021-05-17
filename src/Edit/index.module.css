@@ -1,0 +1,278 @@
+.container {
+  min-height: 100vh;
+  background-color: #ddd;
+}
+
+.print-area {
+  display: none;
+}
+
+@media print {
+  .container {
+    display: none;
+  }
+  .print-area {
+    display: block;
+  }
+}
+
+.nav-content-wrap {
+  display: flex;
+}
+
+.content {
+  box-sizing: border-box;
+  display: flex;
+  padding: 1rem;
+  flex: 1;
+  max-width: 1280px;
+  min-height: calc(100vh - 60px);
+  word-break: break-all;
+}
+
+.paper {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  background-color: #fff;
+  flex: 1;
+  min-height: 100%;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.edit {
+}
+
+.close-icon {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.close-icon:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.close-icon svg {
+  fill: #fff;
+}
+
+.preview {
+  display: none;
+  position: relative;
+
+  margin-left: 1rem;
+}
+
+.nav {
+  position: fixed;
+  left: 0;
+  top: auto;
+  transform: translateX(-100%);
+  width: 240px;
+  height: 100vh;
+  background-color: #fff;
+  transition: 0.3s;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-space {
+  display: none;
+  width: 240px;
+  flex-shrink: 0;
+}
+
+.nav-space::after {
+  content: "";
+  display: block;
+}
+
+.nav.open {
+  position: fixed;
+  top: 0;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 99;
+}
+
+.nav-layer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  z-index: -98;
+  transition: 0.3s;
+}
+
+.nav-layer.open {
+  opacity: 1;
+  visibility: visible;
+  z-index: 98;
+}
+
+.app-bar-preview-btn {
+  display: block;
+  color: #fff;
+  margin-right: 1rem;
+  height: 32px;
+  line-height: 32px;
+  border-radius: 3px;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.app-bar-preview-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.app-bar-hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  margin-left: 1rem;
+  border-radius: 50%;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.app-bar-hamburger-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.app-bar-hamburger {
+  width: 60%;
+}
+
+.app-bar-hamburger::before,
+.app-bar-hamburger::after,
+.app-bar-hamburger div {
+  display: block;
+  content: "";
+  height: 3px;
+  border-radius: 3px;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+.app-bar-hamburger::before,
+.app-bar-hamburger div {
+  margin-bottom: 4px;
+}
+
+.app-bar-hamburger.open:before {
+  transform: translateY(7px) rotate(45deg);
+}
+.app-bar-hamburger.open:after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.app-bar-hamburger.open div {
+  transform: scale(0);
+}
+
+@media (min-width: 640px) {
+  /* tablet */
+  .preview {
+    display: none;
+  }
+
+  .app-bar-preview-btn {
+    display: block;
+  }
+
+  .app-bar-hamburger-btn {
+    display: none;
+  }
+
+  .nav-space {
+    display: block;
+  }
+
+  .nav {
+    top: auto;
+    visibility: visible;
+    transform: translateX(0);
+    z-index: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* laptop */
+  .preview {
+    display: block;
+  }
+
+  .app-bar-preview-btn {
+    display: none;
+  }
+
+  .app-bar-hamburger-btn {
+    display: flex;
+  }
+
+  .nav-space {
+    display: none;
+  }
+
+  .nav {
+    visibility: hidden;
+    transform: translateX(-100%);
+    z-index: -99;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* desktop */
+  .nav {
+    top: auto;
+    visibility: visible;
+    transform: translateX(0);
+    z-index: auto;
+  }
+
+  .app-bar-hamburger-btn {
+    display: none;
+  }
+
+  .nav-space {
+    display: block;
+  }
+}
+
+.full-screen-icon {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #000;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.preview:hover .full-screen-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+}
+
+.full-screen-icon svg {
+  width: 80%;
+  fill: #fff;
+}
+
+.full-preview {
+  max-width: 210mm;
+}

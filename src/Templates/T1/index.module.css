@@ -1,0 +1,42 @@
+.container {
+}
+
+.base-info {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+.full-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profession {
+  margin-left: 1rem;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.item {
+  display: flex;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}
+
+.link {
+  color: rgb(1, 180, 180);
+  text-decoration: underline;
+}
+
+.label {
+  margin-right: 0.5rem;
+}
+
+.value {
+}

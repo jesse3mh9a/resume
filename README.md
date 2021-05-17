@@ -1,70 +1,21 @@
-# Getting Started with Create React App
+# Edit Resume
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+可以用 html, css 编写我们的简历, 对于从事前端的开发者, 这要比其它方式编写简历更方便, 定制性更强.
+可以在浏览器中进入 `打印`, 如果你拥有打印机设备, 可以直接打印, 大部分场景我们没有设备时, 可以在打印中保存为 `pdf` 文件.
+当打开浏览器打印面板时, 只会展示有必要的打印内容, 其它编辑界面会从窗口离开,不会进入打印内容内.
 
-## Available Scripts
+# Usage
 
-In the project directory, you can run:
+可以打开 web 页面, 在本地编辑简历信息, 支持多份数据信息编辑和切换, 编辑的同时可以即时预览, 切换不同的预览模版. 数据信息会保存在浏览器`storage`中, 后面会加入数据库来保存数据.
 
-### `npm start`
+# Note
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+需要在打印面板勾选:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+✅ check box `Print Background (colors & images)`, 选择`打印背景`, 保证预览内容完整
 
-### `npm test`
+# Contributing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+所有的模版都是手动编写`html` 和`css`完成的, 所以需要你的设计和相关代码.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Read the [contributing guide](/CONTRIBUTING.md) to learn about our development process.

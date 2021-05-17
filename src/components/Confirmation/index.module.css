@@ -1,0 +1,76 @@
+.modal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -999;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal.visible {
+  z-index: 999;
+  opacity: 1;
+  visibility: visible;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+.content {
+  min-width: 400px;
+  padding: 2rem 1em 1em 1em;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.btns-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 1rem;
+  height: 32px;
+  color: #333;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:first-of-type {
+  margin-right: 1rem;
+}
+
+.btn.ok {
+  color: #ff474a;
+  border-color: #ff474a;
+}
+
+.ok:hover {
+  color: #ff8385;
+}
+
+.cancel:hover {
+  border-color: purple;
+  color: purple;
+}
