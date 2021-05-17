@@ -1,4 +1,4 @@
-import useResume from "hooks/useResume";
+import { usePreview } from "hooks/useResume";
 import useTheme from "hooks/useTheme";
 import config from "./config";
 import styles from "./index.module.css";
@@ -6,7 +6,7 @@ import styles from "./index.module.css";
 const Template = () => {
   const {
     personalDetails: { fullName, phone, email, profession, address, website },
-  } = useResume();
+  } = usePreview();
 
   const { primary } = useTheme(config);
 
