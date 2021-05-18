@@ -26,7 +26,7 @@ const AppBar = ({ setStatePreview, open, setOpen }) => {
 
   return (
     <>
-      <div className={cx("wrap", "space")}>
+      <div className={cx("wrap", "space", "px")}>
         <div
           className={editCx("app-bar-hamburger-btn")}
           onClick={() => {
@@ -39,14 +39,14 @@ const AppBar = ({ setStatePreview, open, setOpen }) => {
         </div>
         <div className={cx("right-side")}>
           <div
-            className={editCx("app-bar-preview-btn")}
+            className={editCx("app-bar-preview-btn", "mr")}
             onClick={() => {
               setStatePreview(true);
             }}
           >
             Preview
           </div>
-          <div className={cx("template-choice")}>
+          <div className={cx("template-choice", "mr")}>
             <select
               className={cx("template-select")}
               name="choice"

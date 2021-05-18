@@ -29,6 +29,8 @@
   left: 0;
   top: 30%;
   padding: 1rem 0.5rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   transform: translateX(-100%);
   background-color: #fff;
   box-shadow: -1px 0 3px 1px rgba(0, 0, 0, 0.1);

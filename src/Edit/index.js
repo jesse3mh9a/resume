@@ -21,6 +21,8 @@ const Edit = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { pathname } = location;
+
   const state = location.state || {};
 
   const { templateId } = useContext(Context);
@@ -36,6 +38,11 @@ const Edit = () => {
   const setStatePreview = (preview) => {
     navigate(location.pathname, { state: { preview } });
   };
+
+  useEffect(() => {
+    // pathname改变时,会自动关闭nav
+    setNavOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const beforeprint = () => {
@@ -61,7 +68,7 @@ const Edit = () => {
   } else if (state.preview) {
     return (
       <div className={cx("full-preview")}>
-        <Drawer persist />
+        <Drawer persist wrapCls={cx("full-preview-drawer")} />
         <Preview />
         <div
           className={cx("close-icon")}

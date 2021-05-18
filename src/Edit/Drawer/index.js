@@ -28,7 +28,7 @@ const Drawer = ({ wrapCls, persist = false }) => {
         </div>
       </form>
       <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>
-        <span className={cx("arrow", { left: visible, right: !visible })} />
+        <span className={cx("arrow", { left: !visible, right: visible })} />
       </div>
     </div>
   );

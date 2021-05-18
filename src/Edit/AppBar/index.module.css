@@ -7,7 +7,24 @@
   align-items: center;
   background-color: purple;
   z-index: 89;
+}
+
+.px {
   padding: 0 1rem;
+}
+
+.mr {
+  margin-right: 1rem;
+}
+
+@media (max-width: 360px) {
+  .px {
+    padding: 0 0.5rem;
+  }
+
+  .mr {
+    margin-right: 0.5rem;
+  }
 }
 
 .right-side {
@@ -18,10 +35,6 @@
 
 .space {
   height: 60px;
-}
-
-.template-choice {
-  margin-right: 1rem;
 }
 
 .template-select {
