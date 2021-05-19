@@ -32,7 +32,6 @@ const Drawer = ({ wrapCls, persist = false }) => {
 
   useEffect(() => {
     const onClose = () => {
-      console.log("onClose");
       setVisible(false);
     };
 
