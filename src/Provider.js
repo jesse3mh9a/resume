@@ -62,7 +62,7 @@ const initSection = {
   }),
 };
 
-const themes = Templates.reduce((acc, { id, theme }) => {
+export const themes = Templates.reduce((acc, { id, theme = {} }) => {
   return {
     ...acc,
     [id]: theme,

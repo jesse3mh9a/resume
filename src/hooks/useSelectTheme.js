@@ -1,6 +1,5 @@
 import { useContext } from "react";
-import { Context } from "Provider";
-import Templates from "Templates";
+import { Context, themes } from "Provider";
 import useTheme from "./useTheme";
 
 const useSelectTheme = () => {
@@ -8,7 +7,7 @@ const useSelectTheme = () => {
 
   return {
     theme: useTheme({ id: templateId }),
-    initial: Templates[templateId].theme,
+    initial: themes[templateId],
   };
 };
 

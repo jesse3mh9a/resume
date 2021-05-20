@@ -13,7 +13,9 @@ const cx = classNames.bind(styles);
 export const mergeColors = (color) => {
   const exist = colors.some(({ value }) => value === color);
 
-  return exist ? colors : [{ value: color, name: "initial" }, ...colors];
+  return !exist && color
+    ? [{ value: color, name: "initial" }, ...colors]
+    : colors;
 };
 
 const onCloseEvent = (onClose) => ({
@@ -75,23 +77,27 @@ const Drawer = ({ wrapCls, persist = false }) => {
             <Switch checked={enableDemo} onChange={toggleDemo} />
           </div>
         </div>
-        <div className={cx("form-item")}>
-          <label className={cx("label")}>Primary</label>
-          <div className={cx("input-control")}>
-            <div className={cx("color-options")}>
-              {mergeColors(initial.primary).map(({ name, value }) => (
-                <div
-                  key={name}
-                  style={{ backgroundColor: value }}
-                  className={cx("color-block", { checked: primary === value })}
-                  onClick={() => {
-                    dispatch(setSelectedTheme({ primary: value }));
-                  }}
-                />
-              ))}
+        {initial.primary && (
+          <div className={cx("form-item")}>
+            <label className={cx("label")}>Primary</label>
+            <div className={cx("input-control")}>
+              <div className={cx("color-options")}>
+                {mergeColors(initial.primary).map(({ name, value }) => (
+                  <div
+                    key={name}
+                    style={{ backgroundColor: value }}
+                    className={cx("color-block", {
+                      checked: primary === value,
+                    })}
+                    onClick={() => {
+                      dispatch(setSelectedTheme({ primary: value }));
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </form>
       <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>
         <span className={cx("arrow", { left: !visible, right: visible })} />

@@ -4,10 +4,6 @@ const config = {
   name: "",
   author: "jesse",
   tag: [],
-  theme: {
-    primary: "brown",
-    secondary: "orange",
-  },
 };
 
 export default config;
