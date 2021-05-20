@@ -12,17 +12,14 @@
   border-top: 1px solid #ddd;
 }
 
-.item.selected {
-  padding: 1rem;
-  cursor: default;
-}
-
 .item-content {
   display: flex;
   align-items: center;
 }
 
 .item.selected {
+  padding: 1rem;
+  cursor: default;
   background-color: #fafafa;
 }
 
@@ -94,7 +91,7 @@
 
 .delete {
   margin-top: 1rem;
-  color: purple;
+  color: #999;
   outline: none;
   border: none;
   background-color: transparent;
@@ -102,6 +99,7 @@
 }
 
 .delete:hover {
+  color: purple;
   text-decoration: underline;
 }
 
@@ -128,7 +126,6 @@
 }
 
 .remove-all {
-  color: purple;
   outline: none;
   border: none;
   background-color: transparent;
@@ -138,5 +135,6 @@
 }
 
 .remove-all:hover {
+  color: purple;
   text-decoration: underline;
 }
