@@ -9,16 +9,9 @@
   margin-top: 1rem;
 }
 
-.list {
-}
-
 .item {
   display: flex;
   height: 50px;
-}
-
-.item.select .link {
-  color: purple;
 }
 
 .link {
@@ -36,13 +29,17 @@
   background-color: #fafafa;
 }
 
-/* developing tip*/
-.developing {
-  margin-top: 1rem;
-}
-
 .developing .link {
   display: block;
+}
+
+.item.select .link {
+  color: purple;
+}
+
+/* developing tip */
+.developing {
+  margin-top: 1rem;
 }
 
 .developing-describe {
@@ -67,4 +64,5 @@
 .link.disabled:hover {
   background-color: transparent;
 }
-/* developing tip end*/
+
+/* developing tip end */

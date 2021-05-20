@@ -11,6 +11,7 @@
   .container {
     display: none;
   }
+
   .print-area {
     display: block;
   }
@@ -63,7 +64,6 @@
 .preview {
   display: none;
   position: relative;
-
   margin-left: 1rem;
 }
 
@@ -166,12 +166,14 @@
   margin-bottom: 4px;
 }
 
-.app-bar-hamburger.open:before {
+.app-bar-hamburger.open::before {
   transform: translateY(7px) rotate(45deg);
 }
-.app-bar-hamburger.open:after {
+
+.app-bar-hamburger.open::after {
   transform: translateY(-7px) rotate(-45deg);
 }
+
 .app-bar-hamburger.open div {
   transform: scale(0);
 }
