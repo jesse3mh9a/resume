@@ -70,6 +70,8 @@
 .form-item {
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
+  overflow: hidden;
 }
 
 .input-control {
@@ -84,4 +86,48 @@
 
 .label::after {
   content: ":";
+}
+
+/* color-block */
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40%;
+}
+
+.color-block {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  /* tablet */
+  .color-block {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* laptop */
+  .color-block {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.color-block.checked::after {
+  position: relative;
+  bottom: 5%;
+  content: "";
+  display: inline-block;
+  transform: rotate(45deg);
+  height: 40%;
+  width: 20%;
+  border-bottom: 2px solid #fff;
+  border-right: 2px solid #fff;
 }

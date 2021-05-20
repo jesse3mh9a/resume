@@ -2,9 +2,19 @@ import { useContext, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, update } from "Provider";
+import { Context, DispatchContext, update, setSelectedTheme } from "Provider";
+
+import useSelectTheme from "hooks/useSelectTheme";
+
+import colors from "./colors";
 
 const cx = classNames.bind(styles);
+
+export const mergeColors = (color) => {
+  const exist = colors.some(({ value }) => value === color);
+
+  return exist ? colors : [{ value: color, name: "initial" }, ...colors];
+};
 
 const onCloseEvent = (onClose) => ({
   add: () => {
@@ -17,6 +27,11 @@ const onCloseEvent = (onClose) => ({
 
 const Drawer = ({ wrapCls, persist = false }) => {
   const [visible, setVisible] = useState(false);
+
+  const {
+    theme: { primary },
+    initial,
+  } = useSelectTheme();
 
   const { enableDemo } = useContext(Context);
 
@@ -58,6 +73,23 @@ const Drawer = ({ wrapCls, persist = false }) => {
           <label className={cx("label")}>preview Demo</label>
           <div className={cx("input-control")}>
             <Switch checked={enableDemo} onChange={toggleDemo} />
+          </div>
+        </div>
+        <div className={cx("form-item")}>
+          <label className={cx("label")}>Primary</label>
+          <div className={cx("input-control")}>
+            <div className={cx("color-options")}>
+              {mergeColors(initial.primary).map(({ name, value }) => (
+                <div
+                  key={name}
+                  style={{ backgroundColor: value }}
+                  className={cx("color-block", { checked: primary === value })}
+                  onClick={() => {
+                    dispatch(setSelectedTheme({ primary: value }));
+                  }}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </form>
