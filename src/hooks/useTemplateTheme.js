@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Context, themes } from "Provider";
 import useTheme from "./useTheme";
 
-const useSelectTheme = () => {
+const useTemplateTheme = () => {
   const { templateId } = useContext(Context);
 
   return {
@@ -11,4 +11,4 @@ const useSelectTheme = () => {
   };
 };
 
-export default useSelectTheme;
+export default useTemplateTheme;

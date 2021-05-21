@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 import Switch from "components/Switch";
 import { Context, DispatchContext, update, setSelectedTheme } from "Provider";
 
-import useSelectTheme from "hooks/useSelectTheme";
+import useTemplateTheme from "hooks/useTemplateTheme";
 
 import colors from "./colors";
 
@@ -30,7 +30,7 @@ const onCloseEvent = (onClose) => ({
 const Drawer = ({ wrapCls, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
-  const { theme, initial } = useSelectTheme();
+  const { theme, initial } = useTemplateTheme();
 
   const { enableDemo } = useContext(Context);
 
