@@ -100,6 +100,23 @@
   flex: 1;
 }
 
+.color-picker {
+  margin-top: 0.5rem;
+}
+
+.reset-color {
+  font-size: 0.8rem;
+  color: #999;
+  transition: 0.3s;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.reset-color:hover {
+  color: purple;
+  text-decoration: underline;
+}
+
 .label {
   text-align: right;
   margin-right: 1rem;

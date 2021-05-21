@@ -30,10 +30,7 @@ const onCloseEvent = (onClose) => ({
 const Drawer = ({ wrapCls, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
-  const {
-    theme: { primary },
-    initial,
-  } = useSelectTheme();
+  const { theme, initial } = useSelectTheme();
 
   const { enableDemo } = useContext(Context);
 
@@ -65,6 +62,51 @@ const Drawer = ({ wrapCls, persist = false }) => {
     };
   }, [visible]);
 
+  const ColorPicker = ({ type }) =>
+    initial[type] && (
+      <div className={cx("form-item")}>
+        <div className={cx("color-label")}>
+          <label className={cx("label")}>{type}</label>
+          <div>
+            <input
+              className={cx("color-picker")}
+              type="color"
+              value={theme[type]}
+              onChange={(e) => {
+                dispatch(setSelectedTheme({ [type]: e.target.value }));
+              }}
+            />
+            {initial[type] !== theme[type] && (
+              <div
+                className={cx("reset-color")}
+                onClick={() => {
+                  dispatch(setSelectedTheme({ [type]: initial[type] }));
+                }}
+              >
+                reset
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={cx("input-control")}>
+          <div className={cx("color-options")}>
+            {mergeColors(initial[type]).map(({ name, value }) => (
+              <div
+                key={name}
+                style={{ backgroundColor: value }}
+                className={cx("color-block", {
+                  checked: theme[type] === value,
+                })}
+                onClick={() => {
+                  dispatch(setSelectedTheme({ [type]: value }));
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+
   return (
     <div className={cx("content", wrapCls, { visible, persist })}>
       <div className={cx("layer")} />
@@ -78,27 +120,8 @@ const Drawer = ({ wrapCls, persist = false }) => {
             <Switch checked={enableDemo} onChange={toggleDemo} />
           </div>
         </div>
-        {initial.primary && (
-          <div className={cx("form-item")}>
-            <label className={cx("label")}>Primary</label>
-            <div className={cx("input-control")}>
-              <div className={cx("color-options")}>
-                {mergeColors(initial.primary).map(({ name, value }) => (
-                  <div
-                    key={name}
-                    style={{ backgroundColor: value }}
-                    className={cx("color-block", {
-                      checked: primary === value,
-                    })}
-                    onClick={() => {
-                      dispatch(setSelectedTheme({ primary: value }));
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
+        <ColorPicker type="primary" />
+        <ColorPicker type="secondary" />
       </form>
     </div>
   );
