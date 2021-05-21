@@ -63,7 +63,7 @@ const Drawer = ({ wrapCls, persist = false }) => {
   }, [visible]);
 
   const ColorPicker = ({ type }) =>
-    initial[type] && (
+    initial[type] ? (
       <div className={cx("form-item")}>
         <div className={cx("color-label")}>
           <label className={cx("label")}>{type}</label>
@@ -105,7 +105,7 @@ const Drawer = ({ wrapCls, persist = false }) => {
           </div>
         </div>
       </div>
-    );
+    ) : null;
 
   return (
     <div className={cx("content", wrapCls, { visible, persist })}>
