@@ -5,10 +5,6 @@
   background-color: pink;
 }
 
-.name-wrap {
-  color: rgb(1, 180, 180);
-}
-
 .name {
   font-size: 1.5rem;
   font-weight: bold;
@@ -31,7 +27,6 @@
 }
 
 .link {
-  color: rgb(1, 180, 180);
   text-decoration: underline;
 }
 

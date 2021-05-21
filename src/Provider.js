@@ -62,7 +62,7 @@ const initSection = {
   }),
 };
 
-const themes = Templates.reduce((acc, { id, theme }) => {
+export const themes = Templates.reduce((acc, { id, theme = {} }) => {
   return {
     ...acc,
     [id]: theme,
@@ -92,6 +92,8 @@ const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 
 const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
+
+const SET_SELECTED_THEME = "SET_SELECTED_THEME";
 // constants end
 
 // actions
@@ -138,6 +140,11 @@ export const removeSectionItem = (payload) => ({
   type: REMOVE_SECTION_ITEM,
   payload,
 });
+
+export const setSelectedTheme = (payload) => ({
+  type: SET_SELECTED_THEME,
+  payload,
+});
 // actions end
 
 const mixin = (value, defaultValue) => {
@@ -149,7 +156,7 @@ const mixin = (value, defaultValue) => {
 };
 
 const reducer = (state, action) => {
-  const { currentResume } = state;
+  const { currentResume, templateId } = state;
 
   const options = {
     [SET_CURRENT_RESUME]: {
@@ -219,6 +226,16 @@ const reducer = (state, action) => {
         entries.forEach(([prop, value]) => {
           product.resumes[currentResume][section][index][prop] = value;
         });
+      });
+    },
+
+    [SET_SELECTED_THEME]: () => {
+      return produce(state, (product) => {
+        const current = product.themes[templateId];
+        product.themes[templateId] = {
+          ...current,
+          ...action.payload,
+        };
       });
     },
   };

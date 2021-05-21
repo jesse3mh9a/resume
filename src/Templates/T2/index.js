@@ -1,6 +1,6 @@
 import { usePreview } from "hooks/useResume";
-import useTheme from "hooks/useTheme";
-import config from "./config";
+// import useTheme from "hooks/useTheme";
+// import config from "./config";
 import styles from "./index.module.css";
 
 const Template = () => {
@@ -8,13 +8,11 @@ const Template = () => {
     personalDetails: { fullName, phone, email, profession, address, website },
   } = usePreview();
 
-  const { primary } = useTheme(config);
-
   return (
     <div className={styles.container}>
       <div className={styles["base-info"]}>
         <div>
-          <div style={{ color: primary }} className={styles["name-wrap"]}>
+          <div className={styles["name-wrap"]}>
             <span className={styles.name}>{fullName}</span>
             <span className={styles.profession}>{profession}</span>
           </div>
