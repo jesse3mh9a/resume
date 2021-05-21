@@ -1,14 +1,16 @@
 .content {
+  display: flex;
+  justify-content: flex-end;
   position: absolute;
-  right: -100%;
+  left: 0;
+  right: 0;
   top: 0;
   bottom: 0;
   width: 100%;
-  background-color: #fff;
-  box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
   z-index: -999;
+  transform: translateX(100%);
   transition: 0.3s;
 }
 
@@ -19,7 +21,31 @@
 }
 
 .content.visible {
-  right: -40%;
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 9;
+}
+
+.layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.form {
+  position: static;
+  width: 60%;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.visible .form {
+  position: relative;
 }
 
 .draw-btn {
@@ -63,10 +89,6 @@
   -webkit-transform: rotate(45deg);
 }
 
-.form {
-  padding: 1rem;
-}
-
 .form-item {
   display: flex;
   align-items: center;
@@ -92,7 +114,6 @@
 .color-options {
   display: flex;
   flex-wrap: wrap;
-  width: 40%;
 }
 
 .color-block {

@@ -66,11 +66,12 @@ const Drawer = ({ wrapCls, persist = false }) => {
   }, [visible]);
 
   return (
-    <div
-      className={cx("content", wrapCls, { visible, persist })}
-      onClick={stopOnClosePropagation}
-    >
-      <form className={cx("form")}>
+    <div className={cx("content", wrapCls, { visible, persist })}>
+      <div className={cx("layer")} />
+      <form className={cx("form")} onClick={stopOnClosePropagation}>
+        <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>
+          <span className={cx("arrow", { left: !visible, right: visible })} />
+        </div>
         <div className={cx("form-item")}>
           <label className={cx("label")}>preview Demo</label>
           <div className={cx("input-control")}>
@@ -99,9 +100,6 @@ const Drawer = ({ wrapCls, persist = false }) => {
           </div>
         )}
       </form>
-      <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>
-        <span className={cx("arrow", { left: !visible, right: visible })} />
-      </div>
     </div>
   );
 };
