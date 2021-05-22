@@ -14,10 +14,6 @@ import {
   setPrintMode,
 } from "Edit/Provider";
 
-import FrontScale from "components/FrontScale";
-
-import useFrontScale from "hooks/useFrontScale";
-
 import AppBar from "./AppBar";
 import Nav from "./Nav";
 import FullScreen from "./FullScreen";
@@ -38,8 +34,6 @@ const Container = () => {
   const { printMode, fullScreen } = useContext(EditContext);
 
   const editDispatch = useContext(EditDispatch);
-
-  const frontScale = useFrontScale();
 
   useEffect(() => {
     // pathname改变时,会自动关闭nav
@@ -75,8 +69,7 @@ const Container = () => {
 
   if (fullScreen) {
     return (
-      <FullScreen frontScale={frontScale}>
-        <FrontScale />
+      <FullScreen>
         <Resume />
       </FullScreen>
     );
@@ -106,13 +99,11 @@ const Container = () => {
           </div>
         </div>
         <Preview
-          frontScale={frontScale}
           classes={{
             root: cx("preview", "box"),
             paper: cx("paper"),
           }}
         >
-          <FrontScale />
           <Resume />
         </Preview>
       </div>
