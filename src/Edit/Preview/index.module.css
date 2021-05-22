@@ -1,0 +1,29 @@
+.content {
+  position: relative;
+  max-width: 210mm;
+}
+
+.content:hover .drawer {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9;
+}
+
+.full-screen-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.full-screen-icon {
+  width: 60%;
+  fill: #fff;
+}

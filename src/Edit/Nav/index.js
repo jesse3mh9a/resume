@@ -1,10 +1,17 @@
+import { useContext } from "react";
+
 import { Link, useLocation } from "react-router-dom";
 import classNames from "classnames/bind";
 
-import styles from "./index.module.css";
-import navStyles from "./Nav.module.css";
+import {
+  Context as EditContext,
+  Dispatch as EditDispatch,
+  setNavOpen,
+} from "Edit/Provider";
 
-const cx = classNames.bind({ ...styles, ...navStyles });
+import styles from "./index.module.css";
+
+const cx = classNames.bind(styles);
 
 const menus = [
   {
@@ -25,19 +32,24 @@ const menus = [
   },
 ];
 
-const Nav = ({ open, setOpen }) => {
+const Nav = ({ classes = {} }) => {
   const { pathname } = useLocation();
+
+  const { navOpen } = useContext(EditContext);
+
+  const editDispatch = useContext(EditDispatch);
 
   return (
     <>
-      <div
-        className={cx("nav-layer", { open })}
-        onClick={() => {
-          setOpen(false);
-        }}
-      />
-      <div className={cx("nav-space")} />
-      <div className={cx("nav", { open })}>
+      {navOpen && (
+        <div
+          className={cx(classes.mask)}
+          onClick={() => {
+            editDispatch(setNavOpen(false));
+          }}
+        />
+      )}
+      <div className={cx("content", classes.root, { [classes.open]: navOpen })}>
         <ul className={cx("list")}>
           {menus.map(({ name, link }, i) => {
             return (

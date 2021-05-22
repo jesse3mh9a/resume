@@ -1,0 +1,30 @@
+.content {
+  position: relative;
+  width: 100%;
+  max-width: 210mm;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.content .drawer {
+  position: fixed;
+}
+
+.exit-screen-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.exit-screen-icon {
+  width: 60%;
+  fill: #fff;
+}

@@ -5,8 +5,7 @@ const config = {
   author: "jesse",
   tag: [],
   theme: {
-    primary: "purple",
-    secondary: "pink",
+    primary: "#4caf50",
   },
 };
 
