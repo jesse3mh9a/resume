@@ -16,6 +16,8 @@ import {
 
 import FrontScale from "components/FrontScale";
 
+import useFrontScale from "hooks/useFrontScale";
+
 import AppBar from "./AppBar";
 import Nav from "./Nav";
 import FullScreen from "./FullScreen";
@@ -33,9 +35,11 @@ const Container = () => {
 
   const { templateId } = useContext(Context);
 
-  const { printMode, fullScreen, frontScale } = useContext(EditContext);
+  const { printMode, fullScreen } = useContext(EditContext);
 
   const editDispatch = useContext(EditDispatch);
+
+  const frontScale = useFrontScale();
 
   useEffect(() => {
     // pathname改变时,会自动关闭nav
