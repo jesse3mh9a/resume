@@ -1,42 +1,99 @@
+import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import useTheme from "hooks/useTheme";
+
+import PhoneIcon from "icons/Phone";
+import EmailIcon from "icons/Email";
+import AddressIcon from "icons/Address";
+import GithubIcon from "icons/Github";
 import config from "./config";
 import styles from "./index.module.css";
+
+const cx = classNames.bind(styles);
 
 const Template = () => {
   const {
     personalDetails: { fullName, phone, email, profession, address, website },
+    summary,
+    experience = [],
+    education = [],
   } = usePreview();
 
   const { primary } = useTheme(config);
 
   return (
-    <div className={styles.container}>
-      <div className={styles["base-info"]}>
-        <div>
-          <div style={{ color: primary }}>
-            <span className={styles["full-name"]}>{fullName}</span>
-            <span className={styles.profession}>{profession}</span>
+    <div className={cx("container")}>
+      <div className={cx("base-info")}>
+        <div className={cx("avatar")}></div>
+        <div className={cx("base-info-side")}>
+          <div className={cx("full-name")}>{fullName}</div>
+          <div className={cx("profession")}>{profession}</div>
+          <div className={cx("summary")}>{summary}</div>
+        </div>
+      </div>
+      <div className={cx("bar-wrap", "mt")}>
+        <div className={cx("bar")}>
+          <div className={cx("item")}>
+            <div>
+              <PhoneIcon className={cx("icon")} style={{ fill: primary }} />
+            </div>
+            <div className={cx("info")}>{phone}</div>
           </div>
-          <div className={styles.list}>
-            <div className={styles.item}>
-              <div className={styles.label}>手机</div>
-              <div className={styles.value}>{phone}</div>
+          <div className={cx("item")}>
+            <div>
+              <EmailIcon className={cx("icon")} style={{ fill: primary }} />
             </div>
-            <div className={styles.item}>
-              <div className={styles.label}>邮箱</div>
-              <div className={styles.value}>{email}</div>
+            <div className={cx("info")}>{email}</div>
+          </div>
+          <div className={cx("item")}>
+            <div>
+              <AddressIcon className={cx("icon")} style={{ fill: primary }} />
             </div>
-            <div className={styles.item}>
-              <div className={styles.label}>地址</div>
-              <div className={styles.value}>{address}</div>
+            <div className={cx("info")}>{address}</div>
+          </div>
+          <div className={cx("item")}>
+            <div>
+              <GithubIcon className={cx("icon")} style={{ fill: primary }} />
             </div>
-            <div className={styles.item}>
-              <div className={styles.label}>Github</div>
-              <div className={styles.value}>{website}</div>
-            </div>
+            <div className={cx("info")}>{website}</div>
           </div>
         </div>
+      </div>
+      <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>
+        工作经历
+      </div>
+      <div>
+        {experience.map(
+          ({ key, companyName, startDate, endDate, description }) => {
+            return (
+              <div key={key} className={cx("experience-item", "mt")}>
+                <div>{companyName}</div>
+                <div className={cx("time", "mt-sm")}>
+                  {startDate} ~ {endDate}
+                </div>
+                <div className={cx("description", "mt-sm")}>{description}</div>
+              </div>
+            );
+          }
+        )}
+      </div>
+      <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>
+        教育
+      </div>
+      <div>
+        {education.map(
+          ({ key, schoolName, startDate, endDate, description }) => {
+            return (
+              <div key={key} className={cx("experience-item", "mt")}>
+                <div>{schoolName}</div>
+                <div className={cx("time", "mt-sm")}>
+                  {startDate} ~ {endDate}
+                </div>
+                <div className={cx("description", "mt-sm")}>{description}</div>
+              </div>
+            );
+          }
+        )}
       </div>
     </div>
   );

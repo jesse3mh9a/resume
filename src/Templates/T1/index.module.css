@@ -1,36 +1,92 @@
+.mt-sm {
+  margin-top: 0.5em;
+}
+
+.mt {
+  margin-top: 1em;
+}
+
+.mt-lg {
+  margin-top: 1.5em;
+}
+
+.container {
+  padding: 1em;
+}
+
 .base-info {
   display: flex;
-  justify-content: center;
-  padding: 1rem;
+  align-items: center;
+}
+
+.base-info-side {
+  margin-left: 1em;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 15px;
   background-color: #f0f0f0;
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-image: url(./avatar-male.png);
+  background-size: cover;
+  border: 1px solid #e9e9e9;
 }
 
 .full-name {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 2em;
+  color: #333;
 }
 
 .profession {
-  margin-left: 1rem;
+  margin-top: 0.5em;
+  color: #666;
 }
 
-.list {
+.summary {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: #333;
+}
+
+.bar-wrap {
+  background-color: #f0f0f0;
+  margin-left: -1em;
+  margin-right: -1em;
+}
+
+.bar {
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
+  justify-content: space-between;
+  padding: 1em;
+  font-size: 0.8em;
+  color: #333;
 }
 
 .item {
   display: flex;
-  margin-right: 2rem;
-  margin-bottom: 1rem;
+  align-items: center;
 }
 
-.link {
-  color: rgb(1, 180, 180);
-  text-decoration: underline;
+.icon {
+  width: 20px;
 }
 
-.label {
-  margin-right: 0.5rem;
+.info {
+  margin-left: 0.5em;
+}
+
+.section-title {
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+.time {
+  color: #999;
+}
+
+.description {
+  font-size: 0.8em;
 }

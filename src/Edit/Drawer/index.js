@@ -27,7 +27,7 @@ const onCloseEvent = (onClose) => ({
   },
 });
 
-const Drawer = ({ wrapCls, persist = false }) => {
+const Drawer = ({ classes = {}, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
   const { theme, initial } = useTemplateTheme();
@@ -108,7 +108,7 @@ const Drawer = ({ wrapCls, persist = false }) => {
     ) : null;
 
   return (
-    <div className={cx("content", wrapCls, { visible, persist })}>
+    <div className={cx("content", classes.root, { visible, persist })}>
       <div className={cx("layer")} />
       <form className={cx("form")} onClick={stopOnClosePropagation}>
         <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>

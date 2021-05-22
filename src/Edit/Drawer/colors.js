@@ -36,6 +36,10 @@ const colors = [
     name: "teal",
   },
   {
+    value: "#4caf50",
+    name: "green",
+  },
+  {
     value: "#8bc34a",
     name: "lightGreen",
   },
