@@ -10,11 +10,11 @@ import Drawer from "../Drawer";
 
 const cx = classNames.bind(styles);
 
-const Preview = ({ classes = {}, children }) => {
+const Preview = ({ frontScale, classes = {}, children }) => {
   const editDispatch = useContext(EditDispatch);
 
   return (
-    <div className={cx(classes.root)}>
+    <div className={cx(classes.root)} style={{ fontSize: `${frontScale}rem` }}>
       <div className={cx("content", classes.paper)}>
         <div
           className={cx("full-screen-icon-wrap")}

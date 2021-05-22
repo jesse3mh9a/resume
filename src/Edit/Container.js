@@ -14,6 +14,8 @@ import {
   setPrintMode,
 } from "Edit/Provider";
 
+import FrontScale from "components/FrontScale";
+
 import AppBar from "./AppBar";
 import Nav from "./Nav";
 import FullScreen from "./FullScreen";
@@ -31,7 +33,7 @@ const Container = () => {
 
   const { templateId } = useContext(Context);
 
-  const { printMode, fullScreen } = useContext(EditContext);
+  const { printMode, fullScreen, frontScale } = useContext(EditContext);
 
   const editDispatch = useContext(EditDispatch);
 
@@ -69,7 +71,8 @@ const Container = () => {
 
   if (fullScreen) {
     return (
-      <FullScreen>
+      <FullScreen frontScale={frontScale}>
+        <FrontScale />
         <Resume />
       </FullScreen>
     );
@@ -99,11 +102,13 @@ const Container = () => {
           </div>
         </div>
         <Preview
+          frontScale={frontScale}
           classes={{
             root: cx("preview", "box"),
             paper: cx("paper"),
           }}
         >
+          <FrontScale />
           <Resume />
         </Preview>
       </div>

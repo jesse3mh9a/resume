@@ -10,11 +10,11 @@ import Drawer from "../Drawer";
 
 const cx = classNames.bind(styles);
 
-const FullScreen = ({ children }) => {
+const FullScreen = ({ children, frontScale }) => {
   const editDispatch = useContext(EditDispatch);
 
   return (
-    <div className={cx("content")}>
+    <div className={cx("content")} style={{ fontSize: `${frontScale}rem` }}>
       {children}
       <Drawer persist classes={{ root: cx("drawer") }} />
       <div

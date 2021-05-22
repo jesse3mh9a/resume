@@ -34,27 +34,19 @@ const Template = () => {
       <div className={cx("bar-wrap", "mt")}>
         <div className={cx("bar")}>
           <div className={cx("item")}>
-            <div>
-              <PhoneIcon className={cx("icon")} style={{ fill: primary }} />
-            </div>
+            <PhoneIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{phone}</div>
           </div>
           <div className={cx("item")}>
-            <div>
-              <EmailIcon className={cx("icon")} style={{ fill: primary }} />
-            </div>
+            <EmailIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{email}</div>
           </div>
           <div className={cx("item")}>
-            <div>
-              <AddressIcon className={cx("icon")} style={{ fill: primary }} />
-            </div>
+            <AddressIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{address}</div>
           </div>
           <div className={cx("item")}>
-            <div>
-              <GithubIcon className={cx("icon")} style={{ fill: primary }} />
-            </div>
+            <GithubIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{website}</div>
           </div>
         </div>
