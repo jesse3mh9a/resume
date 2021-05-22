@@ -1,7 +1,0 @@
-.content {
-  position: fixed;
-  width: 210mm;
-  z-index: -999;
-  opacity: 0;
-  visibility: hidden;
-}
