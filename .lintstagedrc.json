@@ -1,5 +1,5 @@
 {
   "*.md": "prettier --write",
-  "*.js": ["eslint", "prettier --write"],
+  "*.js": ["eslint --config ./.eslintrc-stage.json", "prettier --write"],
   "*.css": ["stylelint", "prettier --write"]
 }
