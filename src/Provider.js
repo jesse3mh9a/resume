@@ -72,6 +72,8 @@ export const themes = Templates.reduce((acc, { id, theme = {} }) => {
 export const initialState = {
   currentResume: 0,
 
+  simulateA4: true,
+
   enableDemo: false,
 
   resumes: [initResume()],
@@ -84,6 +86,7 @@ export const initialState = {
 // constants
 const SET_CURRENT_RESUME = "SET_CURRENT_RESUME";
 const UPDATE = "UPDATE";
+const TOGGLE = "TOGGLE";
 const UPDATE_RESUME = "UPDATE_RESUME";
 const SET_SECTION = "SET_SECTION";
 const SET_SECTION_ITEM = "SET_SECTION_ITEM";
@@ -104,6 +107,11 @@ export const resumeOnChange = (payload) => ({
 
 export const update = (payload) => ({
   type: UPDATE,
+  payload,
+});
+
+export const toggle = (payload) => ({
+  type: TOGGLE,
   payload,
 });
 
@@ -167,6 +175,15 @@ const reducer = (state, action) => {
     [UPDATE]: {
       ...state,
       ...action.payload,
+    },
+
+    [TOGGLE]: () => {
+      const [prop, value] = action.payload;
+
+      return {
+        ...state,
+        [prop]: typeof value === "boolean" ? value : !state[prop],
+      };
     },
 
     [UPDATE_RESUME]: () => {

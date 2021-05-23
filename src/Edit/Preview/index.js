@@ -6,6 +6,10 @@ import FullScreenIcon from "icons/FullScreen";
 
 import { Dispatch as EditDispatch, setFullScreen } from "Edit/Provider";
 
+import FrontScale from "components/FrontScale";
+
+import useFrontScale from "hooks/useFrontScale";
+
 import Drawer from "../Drawer";
 
 const cx = classNames.bind(styles);
@@ -13,8 +17,11 @@ const cx = classNames.bind(styles);
 const Preview = ({ classes = {}, children }) => {
   const editDispatch = useContext(EditDispatch);
 
+  const frontScale = useFrontScale();
+
   return (
-    <div className={cx(classes.root)}>
+    <div className={cx(classes.root)} style={{ fontSize: `${frontScale}rem` }}>
+      <FrontScale />
       <div className={cx("content", classes.paper)}>
         <div
           className={cx("full-screen-icon-wrap")}
