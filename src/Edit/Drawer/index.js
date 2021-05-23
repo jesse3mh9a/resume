@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, toggle, setSelectedTheme } from "Provider";
+import { Context, DispatchContext, toggle, setCurrentTheme } from "Provider";
 
-import useTemplateTheme from "hooks/useTemplateTheme";
+import useConfigValueById from "hooks/useConfigValueById";
 
 import colors from "./colors";
 
@@ -30,7 +30,10 @@ const onCloseEvent = (onClose) => ({
 const Drawer = ({ classes = {}, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
-  const { theme, initial } = useTemplateTheme();
+  const {
+    value: { theme },
+    initialValue: { theme: initialTheme },
+  } = useConfigValueById();
 
   const { enableDemo, simulateA4 } = useContext(Context);
 
@@ -59,7 +62,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
   }, [visible]);
 
   const ColorPicker = ({ type }) =>
-    initial[type] ? (
+    initialTheme[type] ? (
       <div className={cx("form-item")}>
         <div className={cx("label")}>
           <div className={cx("label-content")}>
@@ -69,16 +72,16 @@ const Drawer = ({ classes = {}, persist = false }) => {
                 className={cx("color-picker")}
                 type="color"
                 value={theme[type]}
-                onChange={(e) => {
-                  dispatch(setSelectedTheme({ [type]: e.target.value }));
-                }}
+                onChange={(e) =>
+                  dispatch(setCurrentTheme({ [type]: e.target.value }))
+                }
               />
-              {initial[type] !== theme[type] && (
+              {initialTheme[type] !== theme[type] && (
                 <div
                   className={cx("reset-color")}
-                  onClick={() => {
-                    dispatch(setSelectedTheme({ [type]: initial[type] }));
-                  }}
+                  onClick={() =>
+                    dispatch(setCurrentTheme({ [type]: initialTheme[type] }))
+                  }
                 >
                   reset
                 </div>
@@ -88,16 +91,14 @@ const Drawer = ({ classes = {}, persist = false }) => {
         </div>
         <div className={cx("input-control")}>
           <div className={cx("color-options")}>
-            {mergeColors(initial[type]).map(({ name, value }) => (
+            {mergeColors(initialTheme[type]).map(({ name, value }) => (
               <div
                 key={name}
                 style={{ backgroundColor: value }}
                 className={cx("color-block", {
                   checked: theme[type] === value,
                 })}
-                onClick={() => {
-                  dispatch(setSelectedTheme({ [type]: value }));
-                }}
+                onClick={() => dispatch(setCurrentTheme({ [type]: value }))}
               />
             ))}
           </div>

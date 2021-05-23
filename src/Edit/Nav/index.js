@@ -70,16 +70,6 @@ const Nav = ({ classes = {} }) => {
               Resume data
             </Link>
           </li>
-          <li className={cx("item", "developing")}>
-            <div className={cx("link", "disabled")}>
-              <div>
-                Database<span>developing...</span>
-              </div>
-              <div className={cx("developing-describe")}>
-                Save resume data to your database
-              </div>
-            </div>
-          </li>
         </ul>
       </div>
     </>
