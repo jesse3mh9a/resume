@@ -72,6 +72,8 @@ export const themes = Templates.reduce((acc, { id, theme = {} }) => {
 export const initialState = {
   currentResume: 0,
 
+  simulateA4: true,
+
   enableDemo: false,
 
   resumes: [initResume()],
@@ -94,6 +96,7 @@ const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
 const SET_SELECTED_THEME = "SET_SELECTED_THEME";
+const SET_SIMULATE_A4 = "SET_SIMULATE_A4";
 // constants end
 
 // actions
@@ -143,6 +146,11 @@ export const removeSectionItem = (payload) => ({
 
 export const setSelectedTheme = (payload) => ({
   type: SET_SELECTED_THEME,
+  payload,
+});
+
+export const setSimulateA4 = (payload) => ({
+  type: SET_SIMULATE_A4,
   payload,
 });
 // actions end
@@ -237,6 +245,16 @@ const reducer = (state, action) => {
           ...action.payload,
         };
       });
+    },
+
+    [SET_SIMULATE_A4]: () => {
+      return {
+        ...state,
+        simulateA4:
+          typeof action.payload === "boolean"
+            ? action.payload
+            : !state.simulateA4,
+      };
     },
   };
 

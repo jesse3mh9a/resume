@@ -2,7 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, update, setSelectedTheme } from "Provider";
+import {
+  Context,
+  DispatchContext,
+  update,
+  setSelectedTheme,
+  setSimulateA4,
+} from "Provider";
 
 import useTemplateTheme from "hooks/useTemplateTheme";
 
@@ -32,7 +38,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { theme, initial } = useTemplateTheme();
 
-  const { enableDemo } = useContext(Context);
+  const { enableDemo, simulateA4 } = useContext(Context);
 
   const dispatch = useContext(DispatchContext);
 
@@ -118,6 +124,17 @@ const Drawer = ({ classes = {}, persist = false }) => {
           <label className={cx("label")}>preview Demo</label>
           <div className={cx("input-control")}>
             <Switch checked={enableDemo} onChange={toggleDemo} />
+          </div>
+        </div>
+        <div className={cx("form-item")}>
+          <label className={cx("label")}>Simulate A4 page printing view</label>
+          <div className={cx("input-control")}>
+            <Switch
+              checked={simulateA4}
+              onChange={() => {
+                dispatch(setSimulateA4());
+              }}
+            />
           </div>
         </div>
         <ColorPicker type="primary" />
