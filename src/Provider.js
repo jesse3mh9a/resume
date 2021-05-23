@@ -22,7 +22,6 @@ const initResume = () => ({
   updateTime: "",
 
   personalDetails: {
-    resumeName: "",
     fullName: "",
     profession: "",
     phone: "",
