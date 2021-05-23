@@ -22,7 +22,6 @@ const initResume = () => ({
   updateTime: "",
 
   personalDetails: {
-    resumeName: "",
     fullName: "",
     profession: "",
     phone: "",
@@ -62,10 +61,11 @@ const initSection = {
   }),
 };
 
-export const themes = Templates.reduce((acc, { id, theme = {} }) => {
+// initial config
+export const config = Templates.reduce((acc, { id, theme = {} }) => {
   return {
     ...acc,
-    [id]: theme,
+    [id]: { theme },
   };
 }, {});
 
@@ -80,7 +80,7 @@ export const initialState = {
 
   templateId: 1,
 
-  themes,
+  config,
 };
 
 // constants
@@ -96,7 +96,7 @@ const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
-const SET_SELECTED_THEME = "SET_SELECTED_THEME";
+const SET_CURRENT_THEME = "SET_CURRENT_THEME";
 // constants end
 
 // actions
@@ -149,10 +149,11 @@ export const removeSectionItem = (payload) => ({
   payload,
 });
 
-export const setSelectedTheme = (payload) => ({
-  type: SET_SELECTED_THEME,
+export const setCurrentTheme = (payload) => ({
+  type: SET_CURRENT_THEME,
   payload,
 });
+
 // actions end
 
 const mixin = (value, defaultValue) => {
@@ -246,10 +247,10 @@ const reducer = (state, action) => {
       });
     },
 
-    [SET_SELECTED_THEME]: () => {
+    [SET_CURRENT_THEME]: () => {
       return produce(state, (product) => {
-        const current = product.themes[templateId];
-        product.themes[templateId] = {
+        const current = product.config[templateId].theme;
+        product.config[templateId].theme = {
           ...current,
           ...action.payload,
         };

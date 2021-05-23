@@ -39,7 +39,7 @@
 
 .form {
   position: static;
-  width: 60%;
+  width: 70%;
   padding: 1rem;
   background-color: #fff;
   box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
@@ -119,13 +119,33 @@
 }
 
 .label {
+  display: flex;
+  align-items: center;
+  width: 8rem;
   text-align: right;
   margin-right: 1rem;
   color: #333;
+  word-break: normal;
+}
+
+@media (max-width: 450px) {
+  .label {
+    font-size: 0.8rem;
+    width: 5rem;
+  }
 }
 
 .label::after {
   content: ":";
+  margin-left: 0.3rem;
+}
+
+.label-content {
+  width: 100%;
+}
+
+.color-picker-row {
+  width: 100%;
 }
 
 /* color-block */
@@ -146,16 +166,16 @@
 @media (min-width: 640px) {
   /* tablet */
   .color-block {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
 }
 
 @media (min-width: 1024px) {
   /* laptop */
   .color-block {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 }
 

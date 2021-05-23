@@ -6,8 +6,12 @@ import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
 import AddressIcon from "icons/Address";
 import GithubIcon from "icons/Github";
+// import Website from "icons/Website";
 import config from "./config";
 import styles from "./index.module.css";
+
+import avatarMale from "./avatar-male.png";
+// import avatarFemale from "./avatar-female.png";
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +28,10 @@ const Template = () => {
   return (
     <div className={cx("container")}>
       <div className={cx("base-info")}>
-        <div className={cx("avatar")}></div>
+        <div
+          className={cx("avatar")}
+          style={{ backgroundImage: `url(${avatarMale})` }}
+        ></div>
         <div className={cx("base-info-side")}>
           <div className={cx("full-name")}>{fullName}</div>
           <div className={cx("profession")}>{profession}</div>
