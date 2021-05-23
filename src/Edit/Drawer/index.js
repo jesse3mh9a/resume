@@ -2,13 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import {
-  Context,
-  DispatchContext,
-  update,
-  setSelectedTheme,
-  setSimulateA4,
-} from "Provider";
+import { Context, DispatchContext, toggle, setSelectedTheme } from "Provider";
 
 import useTemplateTheme from "hooks/useTemplateTheme";
 
@@ -41,10 +35,6 @@ const Drawer = ({ classes = {}, persist = false }) => {
   const { enableDemo, simulateA4 } = useContext(Context);
 
   const dispatch = useContext(DispatchContext);
-
-  const toggleDemo = () => {
-    dispatch(update({ enableDemo: !enableDemo }));
-  };
 
   const stopOnClosePropagation = (event) => {
     event.stopPropagation();
@@ -123,7 +113,12 @@ const Drawer = ({ classes = {}, persist = false }) => {
         <div className={cx("form-item")}>
           <label className={cx("label")}>preview Demo</label>
           <div className={cx("input-control")}>
-            <Switch checked={enableDemo} onChange={toggleDemo} />
+            <Switch
+              checked={enableDemo}
+              onChange={() => {
+                dispatch(toggle(["enableDemo"]));
+              }}
+            />
           </div>
         </div>
         <div className={cx("form-item")}>
@@ -132,7 +127,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
             <Switch
               checked={simulateA4}
               onChange={() => {
-                dispatch(setSimulateA4());
+                dispatch(toggle(["simulateA4"]));
               }}
             />
           </div>

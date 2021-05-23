@@ -86,6 +86,7 @@ export const initialState = {
 // constants
 const SET_CURRENT_RESUME = "SET_CURRENT_RESUME";
 const UPDATE = "UPDATE";
+const TOGGLE = "TOGGLE";
 const UPDATE_RESUME = "UPDATE_RESUME";
 const SET_SECTION = "SET_SECTION";
 const SET_SECTION_ITEM = "SET_SECTION_ITEM";
@@ -96,7 +97,6 @@ const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
 const SET_SELECTED_THEME = "SET_SELECTED_THEME";
-const SET_SIMULATE_A4 = "SET_SIMULATE_A4";
 // constants end
 
 // actions
@@ -107,6 +107,11 @@ export const resumeOnChange = (payload) => ({
 
 export const update = (payload) => ({
   type: UPDATE,
+  payload,
+});
+
+export const toggle = (payload) => ({
+  type: TOGGLE,
   payload,
 });
 
@@ -148,11 +153,6 @@ export const setSelectedTheme = (payload) => ({
   type: SET_SELECTED_THEME,
   payload,
 });
-
-export const setSimulateA4 = (payload) => ({
-  type: SET_SIMULATE_A4,
-  payload,
-});
 // actions end
 
 const mixin = (value, defaultValue) => {
@@ -175,6 +175,15 @@ const reducer = (state, action) => {
     [UPDATE]: {
       ...state,
       ...action.payload,
+    },
+
+    [TOGGLE]: () => {
+      const [prop, value] = action.payload;
+
+      return {
+        ...state,
+        [prop]: typeof value === "boolean" ? value : !state[prop],
+      };
     },
 
     [UPDATE_RESUME]: () => {
@@ -245,16 +254,6 @@ const reducer = (state, action) => {
           ...action.payload,
         };
       });
-    },
-
-    [SET_SIMULATE_A4]: () => {
-      return {
-        ...state,
-        simulateA4:
-          typeof action.payload === "boolean"
-            ? action.payload
-            : !state.simulateA4,
-      };
     },
   };
 
