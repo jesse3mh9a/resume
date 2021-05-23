@@ -61,29 +61,31 @@ const Drawer = ({ classes = {}, persist = false }) => {
   const ColorPicker = ({ type }) =>
     initial[type] ? (
       <div className={cx("form-item")}>
-        <div className={cx("color-label")}>
-          <label className={cx("label")}>{type}</label>
-          <div>
-            <input
-              className={cx("color-picker")}
-              type="color"
-              value={theme[type]}
-              onChange={(e) => {
-                dispatch(setSelectedTheme({ [type]: e.target.value }));
-              }}
-            />
-            {initial[type] !== theme[type] && (
-              <div
-                className={cx("reset-color")}
-                onClick={() => {
-                  dispatch(setSelectedTheme({ [type]: initial[type] }));
+        <label className={cx("label")}>
+          <div className={cx("label-content")}>
+            <div>{type}</div>
+            <div className={cx("color-picker-row")}>
+              <input
+                className={cx("color-picker")}
+                type="color"
+                value={theme[type]}
+                onChange={(e) => {
+                  dispatch(setSelectedTheme({ [type]: e.target.value }));
                 }}
-              >
-                reset
-              </div>
-            )}
+              />
+              {initial[type] !== theme[type] && (
+                <div
+                  className={cx("reset-color")}
+                  onClick={() => {
+                    dispatch(setSelectedTheme({ [type]: initial[type] }));
+                  }}
+                >
+                  reset
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </label>
         <div className={cx("input-control")}>
           <div className={cx("color-options")}>
             {mergeColors(initial[type]).map(({ name, value }) => (
