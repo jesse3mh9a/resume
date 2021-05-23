@@ -6,12 +6,12 @@ import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
 import AddressIcon from "icons/Address";
 import GithubIcon from "icons/Github";
-import Website from "icons/Website";
+// import Website from "icons/Website";
 import config from "./config";
 import styles from "./index.module.css";
 
 import avatarMale from "./avatar-male.png";
-import avatarFemale from "./avatar-female.png";
+// import avatarFemale from "./avatar-female.png";
 
 const cx = classNames.bind(styles);
 
