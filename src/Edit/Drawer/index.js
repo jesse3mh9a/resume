@@ -61,9 +61,9 @@ const Drawer = ({ classes = {}, persist = false }) => {
   const ColorPicker = ({ type }) =>
     initial[type] ? (
       <div className={cx("form-item")}>
-        <label className={cx("label")}>
+        <div className={cx("label")}>
           <div className={cx("label-content")}>
-            <div>{type}</div>
+            <label>{type}</label>
             <div className={cx("color-picker-row")}>
               <input
                 className={cx("color-picker")}
@@ -85,7 +85,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
               )}
             </div>
           </div>
-        </label>
+        </div>
         <div className={cx("input-control")}>
           <div className={cx("color-options")}>
             {mergeColors(initial[type]).map(({ name, value }) => (
