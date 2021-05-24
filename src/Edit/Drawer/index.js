@@ -4,8 +4,9 @@ import styles from "./index.module.css";
 import Switch from "components/Switch";
 import { Context, DispatchContext, toggle, setCurrentConfig } from "Provider";
 
-import { useCurConfig, useCurInitConfig, useTemplate } from "hooks/useConfig";
+import { useCurConfig, useCurInitConfig } from "hooks/useConfig";
 
+import Section from "./Section";
 import colors from "./colors";
 
 const cx = classNames.bind(styles);
@@ -34,9 +35,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { theme: initialTheme } = useCurInitConfig();
 
-  const { theme, general } = useCurConfig();
-
-  const { general: generalForm, section: sectionForm } = useTemplate();
+  const { theme } = useCurConfig();
 
   const dispatch = useContext(DispatchContext);
 
@@ -147,39 +146,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
         </div>
         <ColorPicker type="primary" />
         <ColorPicker type="secondary" />
-        <div>
-          {generalForm.map((item) => {
-            const { options, name } = item;
-
-            return (
-              <select
-                key={name}
-                value={general[name]}
-                onChange={(e) => {
-                  dispatch(
-                    setCurrentConfig(["general", { [name]: e.target.value }])
-                  );
-                }}
-              >
-                {options.map((sub) => (
-                  <option key={sub} value={sub}>
-                    {sub}
-                  </option>
-                ))}
-              </select>
-            );
-          })}
-        </div>
-
-        {sectionForm.map((item, i) => {
-          // const { control } = item;
-          return (
-            <div key={i}>
-              <input />
-            </div>
-          );
-        })}
-        <div></div>
+        <Section />
       </form>
     </div>
   );
