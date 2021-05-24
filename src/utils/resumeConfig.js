@@ -17,6 +17,22 @@ const getValue = (arr) => {
   }, {});
 };
 
+const getGroupValue = (arr) => {
+  return arr.reduce((acc, { name, group, multiple }) => {
+    const value = group.reduce(
+      (acc, { name: subName, value }) => ({
+        ...acc,
+        [subName]: value,
+      }),
+      {}
+    );
+    return {
+      ...acc,
+      [name]: multiple ? [value] : value,
+    };
+  }, {});
+};
+
 export const initialConfig = Templates.reduce(
   (acc, { id, theme = {}, general = [], section = [] }) => {
     return {
@@ -24,7 +40,7 @@ export const initialConfig = Templates.reduce(
       [id]: {
         theme,
         general: getValue(general),
-        section: getValue(section),
+        section: getGroupValue(section),
       },
     };
   },

@@ -13,8 +13,7 @@ const config = {
     {
       name: "avatar",
       label: "Avatar",
-      type: "options",
-      custom: true,
+      control: "select",
       value: "male",
       options: ["male", "female"],
     },
@@ -22,8 +21,7 @@ const config = {
     {
       name: "website",
       label: "Website",
-      custom: false,
-      type: "options",
+      control: "select",
       value: "github",
       options: ["website", "github"],
     },
@@ -32,13 +30,38 @@ const config = {
   section: [
     {
       name: "skills",
-      value: [],
-      max: 10,
-      type: [
+      label: "Skills",
+      multiple: true,
+      group: [
         {
           label: "Name",
           name: "name",
-          type: "text",
+          value: "javascript",
+          control: "text",
+        },
+        {
+          label: "Degree",
+          name: "degree",
+          value: 90,
+          control: "text",
+        },
+      ],
+    },
+    {
+      name: "interest",
+      label: "Interest",
+      group: [
+        {
+          label: "Name",
+          name: "name",
+          value: "javascript",
+          control: "text",
+        },
+        {
+          label: "Degree",
+          name: "degree",
+          value: 90,
+          control: "text",
         },
       ],
     },

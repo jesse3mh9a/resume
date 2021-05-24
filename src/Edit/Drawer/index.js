@@ -34,9 +34,9 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { theme: initialTheme } = useCurInitConfig();
 
-  const { theme, general } = useCurConfig();
+  const { theme, general, section } = useCurConfig();
 
-  const { general: generalForm } = useTemplate();
+  const { general: generalForm, section: sectionForm } = useTemplate();
 
   const dispatch = useContext(DispatchContext);
 
@@ -147,27 +147,39 @@ const Drawer = ({ classes = {}, persist = false }) => {
         </div>
         <ColorPicker type="primary" />
         <ColorPicker type="secondary" />
-        {generalForm.map((item) => {
-          const { options, name } = item;
+        <div>
+          {generalForm.map((item) => {
+            const { options, name } = item;
 
+            return (
+              <select
+                key={name}
+                value={general[name]}
+                onChange={(e) => {
+                  dispatch(
+                    setCurrentConfig(["general", { [name]: e.target.value }])
+                  );
+                }}
+              >
+                {options.map((sub) => (
+                  <option key={sub} value={sub}>
+                    {sub}
+                  </option>
+                ))}
+              </select>
+            );
+          })}
+        </div>
+
+        {sectionForm.map((item, i) => {
+          const { control } = item;
           return (
-            <select
-              key={name}
-              value={general[name]}
-              onChange={(e) => {
-                dispatch(
-                  setCurrentConfig(["general", { [name]: e.target.value }])
-                );
-              }}
-            >
-              {options.map((sub) => (
-                <option key={sub} value={sub}>
-                  {sub}
-                </option>
-              ))}
-            </select>
+            <div key={i}>
+              <input />
+            </div>
           );
         })}
+        <div></div>
       </form>
     </div>
   );
