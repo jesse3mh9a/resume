@@ -1,5 +1,8 @@
 import { useContext } from "react";
-import { Context, config as initialConfig } from "Provider";
+
+import { Context } from "Provider";
+
+import { initialConfig } from "utils/resumeConfig";
 
 const useConfigValueById = () => {
   const { config, templateId: id } = useContext(Context);

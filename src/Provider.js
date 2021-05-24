@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import produce from "immer";
 
-import Templates from "Templates";
+import { initialConfig } from "utils/resumeConfig";
 
 import Storage from "utils/storage";
 
@@ -61,14 +61,6 @@ const initSection = {
   }),
 };
 
-// initial config
-export const config = Templates.reduce((acc, { id, theme = {} }) => {
-  return {
-    ...acc,
-    [id]: { theme },
-  };
-}, {});
-
 export const initialState = {
   currentResume: 0,
 
@@ -80,11 +72,12 @@ export const initialState = {
 
   templateId: 1,
 
-  config,
+  config: initialConfig,
 };
 
 // constants
 const SET_CURRENT_RESUME = "SET_CURRENT_RESUME";
+const INIT = "INIT";
 const UPDATE = "UPDATE";
 const TOGGLE = "TOGGLE";
 const UPDATE_RESUME = "UPDATE_RESUME";
@@ -102,6 +95,11 @@ const SET_CURRENT_THEME = "SET_CURRENT_THEME";
 // actions
 export const resumeOnChange = (payload) => ({
   type: SET_CURRENT_RESUME,
+  payload,
+});
+
+export const initAction = (payload) => ({
+  type: INIT,
   payload,
 });
 
@@ -171,6 +169,10 @@ const reducer = (state, action) => {
     [SET_CURRENT_RESUME]: {
       ...state,
       currentResume: action.payload,
+    },
+
+    [INIT]: () => {
+      return init(initialState);
     },
 
     [UPDATE]: {

@@ -9,9 +9,10 @@ const config = {
     primary: "#4caf50",
   },
 
-  section: {
+  general: {
     avatar: {
-      label: "avatar",
+      label: "Avatar",
+      name: "avatar",
       type: "options",
       custom: true,
       value: "male",
@@ -19,31 +20,42 @@ const config = {
     },
 
     website: {
-      label: "website",
+      label: "Website",
+      name: "website",
       custom: false,
       type: "options",
       value: "github",
       options: ["website", "github"],
     },
+  },
 
+  section: {
+    skills: {
+      value: [],
+      max: 10,
+      type: [
+        {
+          label: "Name",
+          name: "name",
+          type: "text",
+        },
+      ],
+    },
+  },
+
+  demo: {
     skills: [
       {
         name: "javascript",
       },
       {
-        name: "React",
+        name: "react",
       },
       {
         name: "html",
       },
       {
         name: "css",
-      },
-      {
-        name: "vue",
-      },
-      {
-        name: "git",
       },
     ],
   },
