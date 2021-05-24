@@ -4,9 +4,7 @@ import styles from "./index.module.css";
 import Switch from "components/Switch";
 import { Context, DispatchContext, toggle, setCurrentConfig } from "Provider";
 
-import { config } from "utils/resumeConfig";
-
-import useConfigValueById from "hooks/useConfigValueById";
+import { useCurConfig, useCurInitConfig, useTemplate } from "hooks/useConfig";
 
 import colors from "./colors";
 
@@ -32,14 +30,13 @@ const onCloseEvent = (onClose) => ({
 const Drawer = ({ classes = {}, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
-  const {
-    value: { theme, general },
-    initialValue: { theme: initialTheme },
-  } = useConfigValueById();
+  const { enableDemo, simulateA4 } = useContext(Context);
 
-  const { enableDemo, simulateA4, templateId } = useContext(Context);
+  const { theme: initialTheme } = useCurInitConfig();
 
-  const { general: generalForm } = config[templateId];
+  const { theme, general } = useCurConfig();
+
+  const { general: generalForm } = useTemplate();
 
   const dispatch = useContext(DispatchContext);
 

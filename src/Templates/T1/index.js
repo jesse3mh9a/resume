@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import useTheme from "hooks/useTheme";
-import useConfig from "hooks/useConfig";
+import { useConfigById } from "hooks/useConfig";
 
 import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
@@ -35,7 +35,7 @@ const Template = () => {
   } = usePreview();
 
   const { primary } = useTheme(config);
-  const { general = {} } = useConfig(config);
+  const { general = {} } = useConfigById(config);
 
   const WebSiteIcon = WEBSITE_ICON[general.website];
 
