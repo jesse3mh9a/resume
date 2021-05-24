@@ -34,7 +34,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { theme: initialTheme } = useCurInitConfig();
 
-  const { theme, general, section } = useCurConfig();
+  const { theme, general } = useCurConfig();
 
   const { general: generalForm, section: sectionForm } = useTemplate();
 
@@ -172,7 +172,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
         </div>
 
         {sectionForm.map((item, i) => {
-          const { control } = item;
+          // const { control } = item;
           return (
             <div key={i}>
               <input />
