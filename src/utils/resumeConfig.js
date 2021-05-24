@@ -9,26 +9,20 @@ export const config = Templates.reduce((acc, item) => {
 }, {});
 
 const getValue = (arr) => {
-  return arr.reduce((acc, { name, value }) => {
-    return {
-      ...acc,
-      [name]: value,
-    };
-  }, {});
-};
-
-const getGroupValue = (arr) => {
-  return arr.reduce((acc, { name, group, multiple }) => {
-    const value = group.reduce(
-      (acc, { name: subName, value }) => ({
+  return arr.reduce((acc, { name, value, group, multiple }) => {
+    const groupValue = (group || []).reduce(
+      (acc, { name: subName, value: subValue }) => ({
         ...acc,
-        [subName]: value,
+        [subName]: subValue,
       }),
       {}
     );
+
+    const v = group ? groupValue : value;
+
     return {
       ...acc,
-      [name]: multiple ? [value] : value,
+      [name]: multiple ? [v] : v,
     };
   }, {});
 };
@@ -40,7 +34,7 @@ export const initialConfig = Templates.reduce(
       [id]: {
         theme,
         general: getValue(general),
-        section: getGroupValue(section),
+        section: getValue(section),
       },
     };
   },
