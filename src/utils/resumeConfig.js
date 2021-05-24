@@ -8,17 +8,17 @@ export const config = Templates.reduce((acc, item) => {
   };
 }, {});
 
-const getValue = (obj) => {
-  return Object.entries(obj).reduce((acc, [prop, { value }]) => {
+const getValue = (arr) => {
+  return arr.reduce((acc, { name, value }) => {
     return {
       ...acc,
-      [prop]: value,
+      [name]: value,
     };
   }, {});
 };
 
 export const initialConfig = Templates.reduce(
-  (acc, { id, theme = {}, general = {}, section = {} }) => {
+  (acc, { id, theme = {}, general = [], section = [] }) => {
     return {
       ...acc,
       [id]: {

@@ -9,28 +9,29 @@ const config = {
     primary: "#4caf50",
   },
 
-  general: {
-    avatar: {
-      label: "Avatar",
+  general: [
+    {
       name: "avatar",
+      label: "Avatar",
       type: "options",
       custom: true,
       value: "male",
       options: ["male", "female"],
     },
 
-    website: {
-      label: "Website",
+    {
       name: "website",
+      label: "Website",
       custom: false,
       type: "options",
       value: "github",
       options: ["website", "github"],
     },
-  },
+  ],
 
-  section: {
-    skills: {
+  section: [
+    {
+      name: "skill",
       value: [],
       max: 10,
       type: [
@@ -41,7 +42,7 @@ const config = {
         },
       ],
     },
-  },
+  ],
 
   demo: {
     skills: [

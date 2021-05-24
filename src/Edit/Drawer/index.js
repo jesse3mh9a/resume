@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, toggle, setCurrentTheme } from "Provider";
+import { Context, DispatchContext, toggle, setCurrentConfig } from "Provider";
+
+import { config } from "utils/resumeConfig";
 
 import useConfigValueById from "hooks/useConfigValueById";
 
@@ -31,11 +33,13 @@ const Drawer = ({ classes = {}, persist = false }) => {
   const [visible, setVisible] = useState(false);
 
   const {
-    value: { theme },
+    value: { theme, general },
     initialValue: { theme: initialTheme },
   } = useConfigValueById();
 
-  const { enableDemo, simulateA4 } = useContext(Context);
+  const { enableDemo, simulateA4, templateId } = useContext(Context);
+
+  const { general: generalForm } = config[templateId];
 
   const dispatch = useContext(DispatchContext);
 
@@ -73,14 +77,21 @@ const Drawer = ({ classes = {}, persist = false }) => {
                 type="color"
                 value={theme[type]}
                 onChange={(e) =>
-                  dispatch(setCurrentTheme({ [type]: e.target.value }))
+                  dispatch(
+                    setCurrentConfig(["theme", { [type]: e.target.value }])
+                  )
                 }
               />
               {initialTheme[type] !== theme[type] && (
                 <div
                   className={cx("reset-color")}
                   onClick={() =>
-                    dispatch(setCurrentTheme({ [type]: initialTheme[type] }))
+                    dispatch(
+                      setCurrentConfig([
+                        "theme",
+                        { [type]: initialTheme[type] },
+                      ])
+                    )
                   }
                 >
                   reset
@@ -98,7 +109,9 @@ const Drawer = ({ classes = {}, persist = false }) => {
                 className={cx("color-block", {
                   checked: theme[type] === value,
                 })}
-                onClick={() => dispatch(setCurrentTheme({ [type]: value }))}
+                onClick={() =>
+                  dispatch(setCurrentConfig(["theme", { [type]: value }]))
+                }
               />
             ))}
           </div>
@@ -137,6 +150,27 @@ const Drawer = ({ classes = {}, persist = false }) => {
         </div>
         <ColorPicker type="primary" />
         <ColorPicker type="secondary" />
+        {generalForm.map((item) => {
+          const { options, name } = item;
+
+          return (
+            <select
+              key={name}
+              value={general[name]}
+              onChange={(e) => {
+                dispatch(
+                  setCurrentConfig(["general", { [name]: e.target.value }])
+                );
+              }}
+            >
+              {options.map((sub) => (
+                <option key={sub} value={sub}>
+                  {sub}
+                </option>
+              ))}
+            </select>
+          );
+        })}
       </form>
     </div>
   );

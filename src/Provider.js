@@ -89,7 +89,7 @@ const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
-const SET_CURRENT_THEME = "SET_CURRENT_THEME";
+const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
 // constants end
 
 // actions
@@ -147,8 +147,8 @@ export const removeSectionItem = (payload) => ({
   payload,
 });
 
-export const setCurrentTheme = (payload) => ({
-  type: SET_CURRENT_THEME,
+export const setCurrentConfig = (payload) => ({
+  type: SET_CURRENT_CONFIG,
   payload,
 });
 
@@ -249,12 +249,14 @@ const reducer = (state, action) => {
       });
     },
 
-    [SET_CURRENT_THEME]: () => {
+    [SET_CURRENT_CONFIG]: () => {
+      const [prop, value] = action.payload;
+
       return produce(state, (product) => {
-        const current = product.config[templateId].theme;
-        product.config[templateId].theme = {
+        const current = product.config[templateId][prop];
+        product.config[templateId][prop] = {
           ...current,
-          ...action.payload,
+          ...value,
         };
       });
     },
