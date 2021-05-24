@@ -31,7 +31,7 @@ const config = {
 
   section: [
     {
-      name: "skill",
+      name: "skills",
       value: [],
       max: 10,
       type: [
@@ -53,10 +53,28 @@ const config = {
         name: "react",
       },
       {
+        name: "redux",
+      },
+      {
+        name: "git",
+      },
+      {
         name: "html",
       },
       {
         name: "css",
+      },
+      {
+        name: "vue",
+      },
+      {
+        name: "ant design",
+      },
+      {
+        name: "material ui",
+      },
+      {
+        name: "tailwindcss",
       },
     ],
   },

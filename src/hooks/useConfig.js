@@ -4,10 +4,12 @@ import { Context } from "Provider";
 
 import { initialConfig, config as Templates } from "utils/resumeConfig";
 
-export const useConfigById = ({ id } = {}) => {
-  const { config } = useContext(Context);
+export const useConfigPreview = ({ id } = {}) => {
+  const { config, enableDemo } = useContext(Context);
 
-  return config[id];
+  const data = config[id];
+
+  return enableDemo ? { ...data, section: Templates[id].demo } : data;
 };
 
 export const useTemplate = () => {

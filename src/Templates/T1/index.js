@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import useTheme from "hooks/useTheme";
-import { useConfigById } from "hooks/useConfig";
+import { useConfigPreview } from "hooks/useConfig";
 
 import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
@@ -35,7 +35,8 @@ const Template = () => {
   } = usePreview();
 
   const { primary } = useTheme(config);
-  const { general = {} } = useConfigById(config);
+  const { general = {}, section: { skills = [] } = {} } =
+    useConfigPreview(config);
 
   const WebSiteIcon = WEBSITE_ICON[general.website];
 
@@ -70,6 +71,24 @@ const Template = () => {
             <WebSiteIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{website}</div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div style={{ color: primary }} className={cx("section-title")}>
+          技能
+        </div>
+        <div className={cx("skills")}>
+          {skills.map((item, i) => {
+            return (
+              <div
+                key={i}
+                style={{ backgroundColor: primary }}
+                className={cx("skills-item")}
+              >
+                {item.name}
+              </div>
+            );
+          })}
         </div>
       </div>
       <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>
