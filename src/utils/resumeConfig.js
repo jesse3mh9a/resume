@@ -8,21 +8,26 @@ export const config = Templates.reduce((acc, item) => {
   };
 }, {});
 
+export const multipleLimit = (multiple) => (count) => {
+  if (typeof multiple === "number") {
+    return count < multiple;
+  }
+
+  return multiple;
+};
+
 const getValue = (arr) => {
   return arr.reduce((acc, { name, value, group, multiple }) => {
-    const groupValue = (group || []).reduce(
-      (acc, { name: subName, value: subValue }) => ({
+    if (group) {
+      const groupValue = getValue(group);
+      return {
         ...acc,
-        [subName]: subValue,
-      }),
-      {}
-    );
-
-    const v = group ? groupValue : value;
-
+        [name]: multiple ? [groupValue] : groupValue,
+      };
+    }
     return {
       ...acc,
-      [name]: multiple ? [v] : v,
+      [name]: value === undefined ? "" : value,
     };
   }, {});
 };

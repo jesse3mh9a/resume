@@ -39,71 +39,96 @@ const Input = ({ type, value, onChange, label }) => {
 const Section = () => {
   const { general, section } = useCurConfig();
 
-  const dispatch = useContext(DispatchContext);
+  const TYPE = {
+    general,
+    section,
+  };
 
-  const test = { ...general, ...section };
+  const dispatch = useContext(DispatchContext);
 
   const { general: generalForm, section: sectionForm } = useTemplate();
 
-  const list = [...generalForm, ...sectionForm];
+  const controlRender = (arr, type) => {
+    const curValue = TYPE[type];
 
-  const controlRender = (arr) =>
-    arr.map((item) => {
+    return arr.map((item) => {
       const { control, group, name } = item;
-      if (control === "select") {
-        const { options, label } = item;
 
-        return (
-          <Select
-            key={name}
-            label={label}
-            options={options}
-            value={test[name]}
-            onChange={(e) =>
-              dispatch(
-                setCurrentConfig(["general", { [name]: e.target.value }])
-              )
+      const curValueDit = curValue[name];
+
+      const curValueArr = Array.isArray(curValueDit)
+        ? curValueDit
+        : [curValueDit];
+
+      return (
+        <div key={name}>
+          {curValueArr.map((_, i) => {
+            if (control === "select") {
+              const { options, label } = item;
+
+              return (
+                <Select
+                  key={i}
+                  label={label}
+                  options={options}
+                  value={curValueArr[i]}
+                  onChange={(e) =>
+                    dispatch(
+                      setCurrentConfig([type, { [name]: e.target.value }])
+                    )
+                  }
+                />
+              );
             }
-          />
-        );
-      }
 
-      if (control === "text") {
-        const { label } = item;
+            if (control === "text") {
+              const { label } = item;
 
-        return (
-          <Input
-            key={name}
-            type="text"
-            label={label}
-            value={test.name}
-            onChange={() => {}}
-          />
-        );
-      }
+              return (
+                <Input
+                  key={name}
+                  type="text"
+                  label={label}
+                  value={curValueArr[i]}
+                  onChange={(e) => {
+                    dispatch(
+                      setCurrentConfig([type, { [name]: e.target.value }])
+                    );
+                  }}
+                />
+              );
+            }
 
-      if (group) {
-        const { label, multiple } = item;
-        return (
-          <div key={name}>
-            <div className={cx("head")}>
-              <div className={cx("title")}>{label}</div>
-              {multiple && (
-                <div className={cx("add")}>
-                  <AddIcon className={cx("add-icon")} />
+            if (group) {
+              const { label, multiple } = item;
+              return (
+                <div key={name}>
+                  <div className={cx("head")}>
+                    <div className={cx("title")}>{label}</div>
+                    {multiple && (
+                      <div className={cx("add")}>
+                        <AddIcon className={cx("add-icon")} />
+                      </div>
+                    )}
+                  </div>
+
+                  {controlRender(group, type)}
                 </div>
-              )}
-            </div>
+              );
+            }
 
-            {controlRender(group)}
-          </div>
-        );
-      }
-
-      return null;
+            return null;
+          })}
+        </div>
+      );
     });
-
-  return controlRender(list);
+  };
+  return (
+    <>
+      {controlRender(generalForm, "general")}
+      {controlRender(sectionForm, "section")}
+    </>
+  );
 };
 
 export default Section;

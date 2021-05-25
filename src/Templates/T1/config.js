@@ -36,13 +36,11 @@ const config = {
         {
           label: "Name",
           name: "name",
-          value: "javascript",
           control: "text",
         },
         {
           label: "Degree",
           name: "degree",
-          value: 90,
           control: "text",
         },
       ],
@@ -54,13 +52,11 @@ const config = {
         {
           label: "Name",
           name: "name",
-          value: "javascript",
           control: "text",
         },
         {
           label: "Degree",
           name: "degree",
-          value: 90,
           control: "text",
         },
       ],
