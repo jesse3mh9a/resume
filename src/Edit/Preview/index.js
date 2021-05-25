@@ -23,16 +23,18 @@ const Preview = ({ classes = {}, children }) => {
     <div className={cx(classes.root)} style={{ fontSize: `${frontScale}rem` }}>
       <FrontScale />
       <div className={cx("content", classes.paper)}>
-        <div
-          className={cx("full-screen-icon-wrap")}
-          onClick={() => {
-            editDispatch(setFullScreen(true));
-          }}
-        >
-          <FullScreenIcon className={cx("full-screen-icon")} />
+        <div className={cx("wrap")}>
+          <div
+            className={cx("full-screen-icon-wrap")}
+            onClick={() => {
+              editDispatch(setFullScreen(true));
+            }}
+          >
+            <FullScreenIcon className={cx("full-screen-icon")} />
+          </div>
+          <Drawer classes={{ root: cx("drawer") }} />
+          {children}
         </div>
-        <Drawer classes={{ root: cx("drawer") }} />
-        {children}
       </div>
     </div>
   );
