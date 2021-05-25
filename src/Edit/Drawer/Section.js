@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import classNames from "classnames/bind";
 import { DispatchContext, setCurrentConfig } from "Provider";
+import AddIcon from "icons/Add";
 import styles from "./Section.module.css";
 import drawerStyles from "./index.module.css";
 import { useCurConfig, useTemplate } from "hooks/useConfig";
@@ -82,7 +83,21 @@ const Section = () => {
       }
 
       if (group) {
-        return controlRender(group);
+        const { label, multiple } = item;
+        return (
+          <div key={name}>
+            <div className={cx("head")}>
+              <div className={cx("title")}>{label}</div>
+              {multiple && (
+                <div className={cx("add")}>
+                  <AddIcon className={cx("add-icon")} />
+                </div>
+              )}
+            </div>
+
+            {controlRender(group)}
+          </div>
+        );
       }
 
       return null;
