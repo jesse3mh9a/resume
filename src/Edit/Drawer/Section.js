@@ -1,10 +1,10 @@
-import { useContext } from "react";
+// import { useContext } from "react";
 import classNames from "classnames/bind";
-import { DispatchContext, setCurrentConfig } from "Provider";
+// import { DispatchContext } from "Provider";
 import AddIcon from "icons/Add";
 import styles from "./Section.module.css";
 import drawerStyles from "./index.module.css";
-import { useCurConfig, useTemplate } from "hooks/useConfig";
+import { useCurConfig } from "hooks/useConfig";
 
 const cx = classNames.bind({ ...drawerStyles, ...styles });
 
@@ -36,97 +36,88 @@ const Input = ({ type, value, onChange, label }) => {
   );
 };
 
+const a = {
+  select: Select,
+  text: Input,
+};
+
+const DefaultWrap = ({ children }) => {
+  return children;
+};
+
+const WrapComponent = ({ wrap: Wrap = DefaultWrap, children } = {}) => {
+  return <Wrap>{children}</Wrap>;
+};
+
+const groupWrap = ({ multiple, label }) => {
+  return ({ children }) => {
+    return (
+      <div>
+        <div className={cx("head")}>
+          <div className={cx("title")}>{label}</div>
+          {multiple && (
+            <div className={cx("add")}>
+              <AddIcon className={cx("add-icon")} />
+            </div>
+          )}
+        </div>
+        {children}
+      </div>
+    );
+  };
+};
+
+const multipleWrap = () => {
+  return ({ children }) => {
+    return (
+      <div style={{ backgroundColor: "pink", marginBottom: "15px" }}>
+        {children}
+      </div>
+    );
+  };
+};
+
 const Section = () => {
+  // const dispatch = useContext(DispatchContext);
+
   const { general, section } = useCurConfig();
 
-  const TYPE = {
-    general,
-    section,
-  };
-
-  const dispatch = useContext(DispatchContext);
-
-  const { general: generalForm, section: sectionForm } = useTemplate();
-
-  const controlRender = (arr, type) => {
-    const curValue = TYPE[type];
-
+  const controlRender = (arr) => {
     return arr.map((item) => {
-      const { control, group, name } = item;
+      const { name, group, value, control } = item;
 
-      const curValueDit = curValue[name];
+      const valArr = Array.isArray(value) ? value : [value];
 
-      const curValueArr = Array.isArray(curValueDit)
-        ? curValueDit
-        : [curValueDit];
-
-      return (
-        <div key={name}>
-          {curValueArr.map((_, i) => {
-            if (control === "select") {
-              const { options, label } = item;
-
+      if (group) {
+        return (
+          <WrapComponent key={name} wrap={groupWrap(item)}>
+            {valArr.map((val, i) => {
               return (
-                <Select
-                  key={i}
-                  label={label}
-                  options={options}
-                  value={curValueArr[i]}
-                  onChange={(e) =>
-                    dispatch(
-                      setCurrentConfig([type, { [name]: e.target.value }])
-                    )
-                  }
-                />
+                <WrapComponent wrap={multipleWrap(item)} key={i}>
+                  {controlRender(
+                    group.map((sub) => {
+                      return {
+                        ...sub,
+                        value: val[sub.name],
+                      };
+                    })
+                  )}
+                </WrapComponent>
               );
-            }
+            })}
+          </WrapComponent>
+        );
+      }
 
-            if (control === "text") {
-              const { label } = item;
+      const Control = a[control];
 
-              return (
-                <Input
-                  key={name}
-                  type="text"
-                  label={label}
-                  value={curValueArr[i]}
-                  onChange={(e) => {
-                    dispatch(
-                      setCurrentConfig([type, { [name]: e.target.value }])
-                    );
-                  }}
-                />
-              );
-            }
-
-            if (group) {
-              const { label, multiple } = item;
-              return (
-                <div key={name}>
-                  <div className={cx("head")}>
-                    <div className={cx("title")}>{label}</div>
-                    {multiple && (
-                      <div className={cx("add")}>
-                        <AddIcon className={cx("add-icon")} />
-                      </div>
-                    )}
-                  </div>
-
-                  {controlRender(group, type)}
-                </div>
-              );
-            }
-
-            return null;
-          })}
-        </div>
-      );
+      return <Control key={name} {...item} onChange={() => {}} />;
     });
   };
   return (
     <>
-      {controlRender(generalForm, "general")}
-      {controlRender(sectionForm, "section")}
+      {controlRender(general)}
+      {controlRender(section)}
     </>
   );
 };

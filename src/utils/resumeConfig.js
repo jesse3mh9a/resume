@@ -16,30 +16,14 @@ export const multipleLimit = (multiple) => (count) => {
   return multiple;
 };
 
-const getValue = (arr) => {
-  return arr.reduce((acc, { name, value, group, multiple }) => {
-    if (group) {
-      const groupValue = getValue(group);
-      return {
-        ...acc,
-        [name]: multiple ? [groupValue] : groupValue,
-      };
-    }
-    return {
-      ...acc,
-      [name]: value === undefined ? "" : value,
-    };
-  }, {});
-};
-
 export const initialConfig = Templates.reduce(
   (acc, { id, theme = {}, general = [], section = [] }) => {
     return {
       ...acc,
       [id]: {
         theme,
-        general: getValue(general),
-        section: getValue(section),
+        general,
+        section,
       },
     };
   },

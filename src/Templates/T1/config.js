@@ -32,6 +32,16 @@ const config = {
       name: "skills",
       label: "Skills",
       multiple: true,
+      value: [
+        {
+          name: "hello",
+          degree: 90,
+        },
+        {
+          name: "hi",
+          degree: 80,
+        },
+      ],
       group: [
         {
           label: "Name",
@@ -48,6 +58,10 @@ const config = {
     {
       name: "interest",
       label: "Interest",
+      value: {
+        name: "yo",
+        degree: 75,
+      },
       group: [
         {
           label: "Name",
