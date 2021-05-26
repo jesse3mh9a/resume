@@ -31,7 +31,7 @@ const config = {
     {
       name: "skills",
       label: "Skills",
-      multiple: true,
+      multiple: 20,
       value: [
         {
           name: "hello",
@@ -69,9 +69,9 @@ const config = {
           control: "text",
         },
         {
-          label: "Degree",
-          name: "degree",
-          control: "text",
+          label: "time",
+          name: "Time",
+          control: "date",
         },
       ],
     },

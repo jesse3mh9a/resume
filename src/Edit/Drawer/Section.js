@@ -2,6 +2,7 @@
 import classNames from "classnames/bind";
 // import { DispatchContext } from "Provider";
 import AddIcon from "icons/Add";
+import { multipleLimit } from "utils/resumeConfig";
 import styles from "./Section.module.css";
 import drawerStyles from "./index.module.css";
 import { useCurConfig } from "hooks/useConfig";
@@ -36,9 +37,17 @@ const Input = ({ type, value, onChange, label }) => {
   );
 };
 
-const a = {
+const controlOption = {
   select: Select,
-  text: Input,
+};
+
+const getControl = (control) => {
+  const a = ["text", "date"];
+  if (a.indexOf(control) !== -1) {
+    return (props) => <Input type={control} {...props} />;
+  }
+
+  return controlOption[control];
 };
 
 const DefaultWrap = ({ children }) => {
@@ -49,13 +58,14 @@ const WrapComponent = ({ wrap: Wrap = DefaultWrap, children } = {}) => {
   return <Wrap>{children}</Wrap>;
 };
 
-const groupWrap = ({ multiple, label }) => {
+const groupWrap = ({ multiple, label }, count = 0) => {
   return ({ children }) => {
+    const hasAdd = multipleLimit(multiple);
     return (
       <div>
         <div className={cx("head")}>
           <div className={cx("title")}>{label}</div>
-          {multiple && (
+          {hasAdd(count) && (
             <div className={cx("add")}>
               <AddIcon className={cx("add-icon")} />
             </div>
@@ -90,7 +100,7 @@ const Section = () => {
 
       if (group) {
         return (
-          <WrapComponent key={name} wrap={groupWrap(item)}>
+          <WrapComponent key={name} wrap={groupWrap(item, valArr.length)}>
             {valArr.map((val, i) => {
               return (
                 <WrapComponent wrap={multipleWrap(item)} key={i}>
@@ -109,7 +119,7 @@ const Section = () => {
         );
       }
 
-      const Control = a[control];
+      const Control = getControl(control);
 
       return <Control key={name} {...item} onChange={() => {}} />;
     });
