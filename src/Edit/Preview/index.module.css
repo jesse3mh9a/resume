@@ -3,10 +3,6 @@
   max-width: 210mm;
 }
 
-.wrap {
-  position: relative;
-}
-
 .content:hover .drawer {
   opacity: 1;
   visibility: visible;

@@ -31,7 +31,7 @@ const Container = () => {
 
   const { templateId } = useContext(Context);
 
-  const { printMode, fullScreen } = useContext(EditContext);
+  const { printMode, fullScreen, drawerVisible } = useContext(EditContext);
 
   const editDispatch = useContext(EditDispatch);
 
@@ -101,7 +101,7 @@ const Container = () => {
         <Preview
           classes={{
             root: cx("preview", "box"),
-            paper: cx("paper"),
+            paper: cx("paper", { overflow: drawerVisible }),
           }}
         >
           <Resume />
