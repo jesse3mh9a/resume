@@ -50,41 +50,29 @@ const getControl = (control) => {
   return controlOption[control];
 };
 
-const DefaultWrap = ({ children }) => {
-  return children;
-};
-
-const WrapComponent = ({ wrap: Wrap = DefaultWrap, children } = {}) => {
-  return <Wrap>{children}</Wrap>;
-};
-
-const groupWrap = ({ multiple, label }, count = 0) => {
-  return ({ children }) => {
-    const hasAdd = multipleLimit(multiple);
-    return (
-      <div>
-        <div className={cx("head")}>
-          <div className={cx("title")}>{label}</div>
-          {hasAdd(count) && (
-            <div className={cx("add")}>
-              <AddIcon className={cx("add-icon")} />
-            </div>
-          )}
-        </div>
-        {children}
+const GroupWrap = ({ multiple, label, count = 0, children }) => {
+  const hasAdd = multipleLimit(multiple);
+  return (
+    <div>
+      <div className={cx("head")}>
+        <div className={cx("title")}>{label}</div>
+        {hasAdd(count) && (
+          <div className={cx("add")}>
+            <AddIcon className={cx("add-icon")} />
+          </div>
+        )}
       </div>
-    );
-  };
+      {children}
+    </div>
+  );
 };
 
-const multipleWrap = () => {
-  return ({ children }) => {
-    return (
-      <div style={{ backgroundColor: "pink", marginBottom: "15px" }}>
-        {children}
-      </div>
-    );
-  };
+const MultipleWrap = ({ children }) => {
+  return (
+    <div style={{ backgroundColor: "pink", marginBottom: "15px" }}>
+      {children}
+    </div>
+  );
 };
 
 const Section = () => {
@@ -100,10 +88,10 @@ const Section = () => {
 
       if (group) {
         return (
-          <WrapComponent key={name} wrap={groupWrap(item, valArr.length)}>
+          <GroupWrap key={name} {...item} count={valArr.length}>
             {valArr.map((val, i) => {
               return (
-                <WrapComponent wrap={multipleWrap(item)} key={i}>
+                <MultipleWrap key={i}>
                   {controlRender(
                     group.map((sub) => {
                       return {
@@ -112,10 +100,10 @@ const Section = () => {
                       };
                     })
                   )}
-                </WrapComponent>
+                </MultipleWrap>
               );
             })}
-          </WrapComponent>
+          </GroupWrap>
         );
       }
 
