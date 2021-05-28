@@ -80,9 +80,9 @@ const Section = () => {
 
   const { general, section } = useCurConfig();
 
-  const controlRender = (arr) => {
-    return arr.map((item) => {
-      const { name, group, value, control } = item;
+  const ControlRender = ({ list, test }) => {
+    return list.map((item) => {
+      const { name, group, value, control, multiple } = item;
 
       const valArr = Array.isArray(value) ? value : [value];
 
@@ -92,14 +92,15 @@ const Section = () => {
             {valArr.map((val, i) => {
               return (
                 <MultipleWrap key={i}>
-                  {controlRender(
-                    group.map((sub) => {
+                  <ControlRender
+                    list={group.map((sub) => {
                       return {
                         ...sub,
                         value: val[sub.name],
                       };
-                    })
-                  )}
+                    })}
+                    test={{ multiple, index: i }}
+                  />
                 </MultipleWrap>
               );
             })}
@@ -114,8 +115,8 @@ const Section = () => {
   };
   return (
     <>
-      {controlRender(general)}
-      {controlRender(section)}
+      <ControlRender list={general} />
+      <ControlRender list={section} />
     </>
   );
 };
