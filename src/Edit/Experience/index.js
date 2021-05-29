@@ -66,13 +66,13 @@ const Experience = () => {
             <form key={key} className={cx("form", "item")}>
               <div className={cx("form-item")}>
                 <label htmlFor={`company-name-${i}`} className={cx("label")}>
-                  job title
+                  Company name
                 </label>
                 <div className={cx("input-control")}>
                   <input
                     id={`company-name-${i}`}
                     className={cx("input")}
-                    placeholder=""
+                    placeholder="Company name"
                     value={companyName}
                     onChange={(e) => {
                       setFormItem({
@@ -83,14 +83,14 @@ const Experience = () => {
                 </div>
               </div>
               <div className={cx("form-item")}>
-                <label htmlFor={`company-name-${i}`} className={cx("label")}>
-                  Company name
+                <label htmlFor={`jop-title-${i}`} className={cx("label")}>
+                  Job title
                 </label>
                 <div className={cx("input-control")}>
                   <input
-                    id={`company-name-${i}`}
+                    id={`jop-title-${i}`}
                     className={cx("input")}
-                    placeholder=""
+                    placeholder="Job title"
                     value={jobTitle}
                     onChange={(e) => {
                       setFormItem({
