@@ -9,7 +9,7 @@ import {
   toggleDrawerVisible,
 } from "../Provider";
 
-import { useCurConfig, useCurInitConfig } from "hooks/useConfig";
+import { useCurConfig, useCurContextConfig } from "hooks/useConfig";
 
 import Section from "./Section";
 import colors from "./colors";
@@ -39,9 +39,9 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { enableDemo, simulateA4 } = useContext(Context);
 
-  const { theme: initialTheme } = useCurInitConfig();
+  const { theme: initialTheme } = useCurConfig();
 
-  const { theme } = useCurConfig();
+  const { theme } = useCurContextConfig();
 
   const dispatch = useContext(DispatchContext);
 

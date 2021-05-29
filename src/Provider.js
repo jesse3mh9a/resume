@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 import produce from "immer";
 
-import { initialConfig } from "utils/resumeConfig";
+import { initialConfigById, changeFromPropChain } from "utils/resumeConfig";
 
 import Storage from "utils/storage";
 
@@ -72,7 +72,7 @@ export const initialState = {
 
   templateId: 1,
 
-  config: initialConfig,
+  config: initialConfigById,
 };
 
 // constants
@@ -90,6 +90,7 @@ const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
 const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
+const SET_CURRENT_CONFIG_WITH_CHAIN = "SET_CURRENT_CONFIG_WITH_CHAIN";
 // constants end
 
 // actions
@@ -149,6 +150,11 @@ export const removeSectionItem = (payload) => ({
 
 export const setCurrentConfig = (payload) => ({
   type: SET_CURRENT_CONFIG,
+  payload,
+});
+
+export const setCurrentConfigWithChain = (payload) => ({
+  type: SET_CURRENT_CONFIG_WITH_CHAIN,
   payload,
 });
 
@@ -258,6 +264,13 @@ const reducer = (state, action) => {
           ...current,
           ...value,
         };
+      });
+    },
+
+    [SET_CURRENT_CONFIG_WITH_CHAIN]: () => {
+      const { chain, value } = action.payload;
+      return produce(state, (product) => {
+        changeFromPropChain(product.config[templateId], chain, value);
       });
     },
   };

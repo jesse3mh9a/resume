@@ -61,10 +61,6 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.paper.overflow {
-  overflow-y: hidden;
-}
-
 .edit {
   flex: 1;
   max-width: 700px;

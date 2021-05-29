@@ -1,11 +1,11 @@
-// import { useContext } from "react";
+import { useContext } from "react";
 import classNames from "classnames/bind";
-// import { DispatchContext } from "Provider";
+import { DispatchContext, setCurrentConfigWithChain } from "Provider";
 import AddIcon from "icons/Add";
 import { multipleLimit } from "utils/resumeConfig";
 import styles from "./Section.module.css";
 import drawerStyles from "./index.module.css";
-import { useCurConfig } from "hooks/useConfig";
+import { useCurConfigSectionWithContext } from "hooks/useConfig";
 
 const cx = classNames.bind({ ...drawerStyles, ...styles });
 
@@ -37,17 +37,20 @@ const Input = ({ type, value, onChange, label }) => {
   );
 };
 
-const controlOption = {
+const ControlOption = {
   select: Select,
 };
 
-const getControl = (control) => {
-  const a = ["text", "date"];
-  if (a.indexOf(control) !== -1) {
-    return (props) => <Input type={control} {...props} />;
+const Control = ({ control, ...rest }) => {
+  const inputTypes = ["text", "date"];
+
+  if (inputTypes.indexOf(control) !== -1) {
+    return <Input type={control} {...rest} />;
   }
 
-  return controlOption[control];
+  const Com = ControlOption[control];
+
+  return <Com {...rest} />;
 };
 
 const GroupWrap = ({ multiple, label, count = 0, children }) => {
@@ -75,48 +78,64 @@ const MultipleWrap = ({ children }) => {
   );
 };
 
+const ControlRender = (props) => {
+  const dispatch = useContext(DispatchContext);
+
+  const { list, chain = [], type } = props;
+  return list.map((item) => {
+    const { name, group, value, control, multiple } = item;
+
+    const valArr = Array.isArray(value) ? value : [value];
+
+    if (group) {
+      return (
+        <GroupWrap key={name} {...item} count={valArr.length}>
+          {valArr.map((val, i) => {
+            const chain = [name, ...(multiple ? [i] : [])];
+            return (
+              <MultipleWrap key={i}>
+                <ControlRender
+                  {...props}
+                  list={group.map((sub) => {
+                    return {
+                      ...sub,
+                      value: val[sub.name],
+                    };
+                  })}
+                  chain={chain}
+                />
+              </MultipleWrap>
+            );
+          })}
+        </GroupWrap>
+      );
+    }
+
+    return (
+      <Control
+        control={control}
+        key={name}
+        {...item}
+        onChange={(e) => {
+          dispatch(
+            setCurrentConfigWithChain({
+              chain: [type, ...chain, name],
+              value: e.target.value,
+            })
+          );
+        }}
+      />
+    );
+  });
+};
+
 const Section = () => {
-  // const dispatch = useContext(DispatchContext);
+  const { general, section } = useCurConfigSectionWithContext();
 
-  const { general, section } = useCurConfig();
-
-  const ControlRender = ({ list, test }) => {
-    return list.map((item) => {
-      const { name, group, value, control, multiple } = item;
-
-      const valArr = Array.isArray(value) ? value : [value];
-
-      if (group) {
-        return (
-          <GroupWrap key={name} {...item} count={valArr.length}>
-            {valArr.map((val, i) => {
-              return (
-                <MultipleWrap key={i}>
-                  <ControlRender
-                    list={group.map((sub) => {
-                      return {
-                        ...sub,
-                        value: val[sub.name],
-                      };
-                    })}
-                    test={{ multiple, index: i }}
-                  />
-                </MultipleWrap>
-              );
-            })}
-          </GroupWrap>
-        );
-      }
-
-      const Control = getControl(control);
-
-      return <Control key={name} {...item} onChange={() => {}} />;
-    });
-  };
   return (
     <>
-      <ControlRender list={general} />
-      <ControlRender list={section} />
+      <ControlRender type="general" list={general} />
+      <ControlRender type="section" list={section} />
     </>
   );
 };

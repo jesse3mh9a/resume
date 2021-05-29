@@ -32,46 +32,36 @@ const config = {
       name: "skills",
       label: "Skills",
       multiple: 20,
-      value: [
-        {
-          name: "hello",
-          degree: 90,
-        },
-        {
-          name: "hi",
-          degree: 80,
-        },
-      ],
       group: [
         {
           label: "Name",
           name: "name",
           control: "text",
+          value: "javascript",
         },
         {
           label: "Degree",
           name: "degree",
           control: "text",
+          value: 90,
         },
       ],
     },
     {
       name: "interest",
       label: "Interest",
-      value: {
-        name: "yo",
-        degree: 75,
-      },
       group: [
         {
           label: "Name",
           name: "name",
           control: "text",
+          value: "football",
         },
         {
-          label: "time",
-          name: "Time",
+          label: "Time",
+          name: "time",
           control: "date",
+          value: "2021-05-28",
         },
       ],
     },
@@ -81,33 +71,43 @@ const config = {
     skills: [
       {
         name: "javascript",
+        degree: 90,
       },
       {
         name: "react",
+        degree: 90,
       },
       {
         name: "redux",
+        degree: 90,
       },
       {
         name: "git",
+        degree: 90,
       },
       {
         name: "html",
+        degree: 90,
       },
       {
         name: "css",
+        degree: 90,
       },
       {
         name: "vue",
+        degree: 80,
       },
       {
         name: "ant design",
+        degree: 90,
       },
       {
         name: "material ui",
+        degree: 90,
       },
       {
         name: "tailwindcss",
+        degree: 80,
       },
     ],
   },
