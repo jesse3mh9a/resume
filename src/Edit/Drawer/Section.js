@@ -4,6 +4,7 @@ import {
   DispatchContext,
   setCurrentConfigWithChain,
   addCurrentConfigSection,
+  removeCurrentConfigSection,
 } from "Provider";
 import AddIcon from "icons/Add";
 import { multipleLimit } from "utils/resumeConfig";
@@ -92,10 +93,22 @@ const GroupWrap = ({ multiple, name, group, label, count = 0, children }) => {
   );
 };
 
-const MultipleWrap = ({ children }) => {
+const MultipleWrap = ({ children, removeOptions }) => {
+  const dispatch = useContext(DispatchContext);
+
   return (
-    <div style={{ backgroundColor: "pink", marginBottom: "15px" }}>
+    <div className={cx("multiple")}>
       {children}
+      <div className={cx("remove")}>
+        <button
+          type="button"
+          onClick={() => {
+            dispatch(removeCurrentConfigSection(removeOptions));
+          }}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   );
 };
@@ -115,7 +128,7 @@ const ControlRender = (props) => {
           {valArr.map((val, i) => {
             const chain = [name, ...(multiple ? [i] : [])];
             return (
-              <MultipleWrap key={val.key || i}>
+              <MultipleWrap key={val.key || i} removeOptions={[name, val.key]}>
                 <ControlRender
                   {...props}
                   list={group.map((sub) => {

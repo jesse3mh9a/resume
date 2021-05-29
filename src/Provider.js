@@ -90,6 +90,7 @@ const REMOVE_RESUME = "REMOVE_RESUME";
 const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
 const SET_CURRENT_CONFIG_WITH_CHAIN = "SET_CURRENT_CONFIG_WITH_CHAIN";
 const ADD_CURRENT_CONFIG_SECTION = "ADD_CURRENT_CONFIG_SECTION";
+const REMOVE_CURRENT_CONFIG_SECTION = "REMOVE_CURRENT_CONFIG_SECTION";
 // constants end
 
 // actions
@@ -159,6 +160,11 @@ export const setCurrentConfigWithChain = (payload) => ({
 
 export const addCurrentConfigSection = (payload) => ({
   type: ADD_CURRENT_CONFIG_SECTION,
+  payload,
+});
+
+export const removeCurrentConfigSection = (payload) => ({
+  type: REMOVE_CURRENT_CONFIG_SECTION,
   payload,
 });
 
@@ -285,6 +291,16 @@ const reducer = (state, action) => {
           key: genKey(),
           ...initailValue,
         });
+      });
+    },
+
+    [REMOVE_CURRENT_CONFIG_SECTION]: () => {
+      const [prop, key] = action.payload;
+      return produce(state, (product) => {
+        const current = product.config[templateId].section[prop];
+        product.config[templateId].section[prop] = current.filter(
+          ({ key: search }) => search !== key
+        );
       });
     },
   };
