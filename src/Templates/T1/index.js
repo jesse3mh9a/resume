@@ -26,6 +26,8 @@ const WEBSITE_ICON = {
 
 const cx = classNames.bind(styles);
 
+const formatDate = (time) => time.replace(/-/g, "/");
+
 const Template = () => {
   const {
     personalDetails: { fullName, phone, email, profession, address, website },
@@ -96,12 +98,13 @@ const Template = () => {
       </div>
       <div>
         {experience.map(
-          ({ key, companyName, startDate, endDate, description }) => {
+          ({ key, companyName, jobTitle, startDate, endDate, description }) => {
             return (
               <div key={key} className={cx("experience-item", "mt")}>
-                <div>{companyName}</div>
+                <div className={cx("company-name")}>{companyName}</div>
+                <div className={cx("job-title", "mt-sm")}>{jobTitle}</div>
                 <div className={cx("time", "mt-sm")}>
-                  {startDate} ~ {endDate}
+                  {formatDate(startDate)} - {formatDate(endDate)}
                 </div>
                 <div className={cx("description", "mt-sm")}>{description}</div>
               </div>
@@ -119,7 +122,7 @@ const Template = () => {
               <div key={key} className={cx("experience-item", "mt")}>
                 <div>{schoolName}</div>
                 <div className={cx("time", "mt-sm")}>
-                  {startDate} ~ {endDate}
+                  {formatDate(startDate)} - {formatDate(endDate)}
                 </div>
                 <div className={cx("description", "mt-sm")}>{description}</div>
               </div>

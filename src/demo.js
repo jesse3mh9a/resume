@@ -30,6 +30,7 @@ const DEMO = {
   experience: [
     {
       key: genKey(),
+      jobTitle: "web前端",
       companyName: "公司公司",
       startDate: "2018-05-30",
       endDate: "2020-06-01",
@@ -38,6 +39,7 @@ const DEMO = {
     },
     {
       key: genKey(),
+      jobTitle: "web前端",
       companyName: "公司公司",
       startDate: "2018-05-30",
       endDate: "2020-06-01",
@@ -46,6 +48,7 @@ const DEMO = {
     },
     {
       key: genKey(),
+      jobTitle: "web前端",
       companyName: "公司公司",
       startDate: "2018-05-30",
       endDate: "2020-06-01",
@@ -54,6 +57,7 @@ const DEMO = {
     },
     {
       key: genKey(),
+      jobTitle: "web前端",
       companyName: "公司公司",
       startDate: "2018-05-30",
       endDate: "2020-06-01",

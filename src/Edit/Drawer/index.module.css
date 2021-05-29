@@ -49,6 +49,7 @@
   padding: 1rem 1rem 2rem;
   background-color: #fff;
   box-shadow: -1px 0 1px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -105,6 +106,21 @@
 
 .input-control {
   flex: 1;
+}
+
+.input {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 0 1rem;
+  color: #333;
+  transition: 0.3s;
+}
+
+.input.textarea {
+  height: initial;
+  padding: 0.5rem 1rem;
 }
 
 .color-picker {

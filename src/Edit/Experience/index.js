@@ -57,13 +57,16 @@ const Experience = () => {
         onOk={confirmationOnOk}
       />
       {experience.map(
-        ({ key, companyName, endDate, startDate, description }, i) => {
+        (
+          { key, jobTitle, companyName, endDate, startDate, description },
+          i
+        ) => {
           const setFormItem = setForm(i);
           return (
             <form key={key} className={cx("form", "item")}>
               <div className={cx("form-item")}>
                 <label htmlFor={`company-name-${i}`} className={cx("label")}>
-                  Company name
+                  job title
                 </label>
                 <div className={cx("input-control")}>
                   <input
@@ -74,6 +77,24 @@ const Experience = () => {
                     onChange={(e) => {
                       setFormItem({
                         companyName: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              </div>
+              <div className={cx("form-item")}>
+                <label htmlFor={`company-name-${i}`} className={cx("label")}>
+                  Company name
+                </label>
+                <div className={cx("input-control")}>
+                  <input
+                    id={`company-name-${i}`}
+                    className={cx("input")}
+                    placeholder=""
+                    value={jobTitle}
+                    onChange={(e) => {
+                      setFormItem({
+                        jobTitle: e.target.value,
                       });
                     }}
                   />

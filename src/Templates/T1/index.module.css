@@ -12,6 +12,7 @@
 
 .container {
   padding: 1em;
+  color: #333;
 }
 
 .base-info {
@@ -103,4 +104,8 @@
 
 .description {
   font-size: 0.8em;
+}
+
+.company-name {
+  font-size: 1.3em;
 }

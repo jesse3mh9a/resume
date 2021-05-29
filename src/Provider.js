@@ -52,6 +52,7 @@ const initSection = {
   experience: () => ({
     key: genKey(),
     id: "",
+    jobTitle: "",
     companyName: "",
     startDate: "",
     endDate: "",

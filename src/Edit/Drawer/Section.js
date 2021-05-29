@@ -14,15 +14,19 @@ import { useCurConfigSectionWithContext } from "hooks/useConfig";
 
 const cx = classNames.bind({ ...drawerStyles, ...styles });
 
-const Select = ({ options, value, onChange, label }) => {
+const Select = ({
+  options,
+  value,
+  onChange,
+  label,
+  placeholder = "--Please choose an option--",
+}) => {
   return (
     <div className={cx("form-item")}>
       <label className={cx("label")}>{label}</label>
-      <div>
-        <select value={value} onChange={onChange}>
-          {value === "" && (
-            <option value="">--Please choose an option--</option>
-          )}
+      <div className={cx("input-control")}>
+        <select className={cx("input")} value={value} onChange={onChange}>
+          {value === "" && <option value="">{placeholder}</option>}
           {options.map((item) => (
             <option key={item} value={item}>
               {item}
@@ -34,12 +38,18 @@ const Select = ({ options, value, onChange, label }) => {
   );
 };
 
-const Input = ({ type, value, onChange, label }) => {
+const Input = ({ type, value, onChange, label, placeholder }) => {
   return (
     <div className={cx("form-item")}>
       <label className={cx("label")}>{label}</label>
-      <div>
-        <input type={type} value={value} onChange={onChange} />
+      <div className={cx("input-control")}>
+        <input
+          placeholder={placeholder || label}
+          className={cx("input")}
+          type={type}
+          value={value}
+          onChange={onChange}
+        />
       </div>
     </div>
   );
