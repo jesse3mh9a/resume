@@ -1,4 +1,5 @@
 import Templates from "Templates";
+import genKey from "utils/genKey";
 
 export const changeFromPropChain = (target, chain, value) => {
   const arr = [...chain];
@@ -13,7 +14,7 @@ export const changeFromPropChain = (target, chain, value) => {
   changeFromPropChain(target[first], arr, value);
 };
 
-export const insertValue = (list, value) => {
+export const insertValue = (list = [], value) => {
   return list.map((item) => {
     const { name, group } = item;
     if (group) {
@@ -45,7 +46,7 @@ export const getValue = (list, opt = {}) => {
       return {
         ...acc,
         ...getValue(group, {
-          value: multiple ? [val] : val,
+          value: multiple ? [{ key: genKey(), ...val }] : val,
           name,
         }),
       };
@@ -55,7 +56,7 @@ export const getValue = (list, opt = {}) => {
 
     return {
       ...acc,
-      [prop]: opt.value || value,
+      [prop]: opt.value || value || "",
     };
   }, {});
 };

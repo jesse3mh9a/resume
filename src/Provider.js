@@ -5,9 +5,7 @@ import { initialConfigById, changeFromPropChain } from "utils/resumeConfig";
 
 import Storage from "utils/storage";
 
-import createGenId from "utils/createGenId";
-
-const genKey = createGenId();
+import genKey from "utils/genKey";
 
 export const storage = new Storage("data");
 
@@ -91,6 +89,7 @@ const REMOVE_RESUME = "REMOVE_RESUME";
 
 const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
 const SET_CURRENT_CONFIG_WITH_CHAIN = "SET_CURRENT_CONFIG_WITH_CHAIN";
+const ADD_CURRENT_CONFIG_SECTION = "ADD_CURRENT_CONFIG_SECTION";
 // constants end
 
 // actions
@@ -155,6 +154,11 @@ export const setCurrentConfig = (payload) => ({
 
 export const setCurrentConfigWithChain = (payload) => ({
   type: SET_CURRENT_CONFIG_WITH_CHAIN,
+  payload,
+});
+
+export const addCurrentConfigSection = (payload) => ({
+  type: ADD_CURRENT_CONFIG_SECTION,
   payload,
 });
 
@@ -271,6 +275,16 @@ const reducer = (state, action) => {
       const { chain, value } = action.payload;
       return produce(state, (product) => {
         changeFromPropChain(product.config[templateId], chain, value);
+      });
+    },
+
+    [ADD_CURRENT_CONFIG_SECTION]: () => {
+      const [prop, initailValue] = action.payload;
+      return produce(state, (product) => {
+        product.config[templateId].section[prop].push({
+          key: genKey(),
+          ...initailValue,
+        });
       });
     },
   };

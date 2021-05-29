@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import classNames from "classnames/bind";
-import { DispatchContext, setCurrentConfigWithChain } from "Provider";
+import {
+  DispatchContext,
+  setCurrentConfigWithChain,
+  addCurrentConfigSection,
+} from "Provider";
 import AddIcon from "icons/Add";
 import { multipleLimit } from "utils/resumeConfig";
 import styles from "./Section.module.css";
@@ -53,14 +57,32 @@ const Control = ({ control, ...rest }) => {
   return <Com {...rest} />;
 };
 
-const GroupWrap = ({ multiple, label, count = 0, children }) => {
+const GroupWrap = ({ multiple, name, group, label, count = 0, children }) => {
+  const dispatch = useContext(DispatchContext);
+
   const hasAdd = multipleLimit(multiple);
+
   return (
     <div>
       <div className={cx("head")}>
         <div className={cx("title")}>{label}</div>
         {hasAdd(count) && (
-          <div className={cx("add")}>
+          <div
+            className={cx("add")}
+            onClick={() => {
+              dispatch(
+                addCurrentConfigSection([
+                  name,
+                  group.reduce((acc, { name }) => {
+                    return {
+                      ...acc,
+                      [name]: "",
+                    };
+                  }, {}),
+                ])
+              );
+            }}
+          >
             <AddIcon className={cx("add-icon")} />
           </div>
         )}
@@ -93,7 +115,7 @@ const ControlRender = (props) => {
           {valArr.map((val, i) => {
             const chain = [name, ...(multiple ? [i] : [])];
             return (
-              <MultipleWrap key={i}>
+              <MultipleWrap key={val.key || i}>
                 <ControlRender
                   {...props}
                   list={group.map((sub) => {
