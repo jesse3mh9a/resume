@@ -20,6 +20,9 @@ const Select = ({ options, value, onChange, label }) => {
       <label className={cx("label")}>{label}</label>
       <div>
         <select value={value} onChange={onChange}>
+          {value === "" && (
+            <option value="">--Please choose an option--</option>
+          )}
           {options.map((item) => (
             <option key={item} value={item}>
               {item}
