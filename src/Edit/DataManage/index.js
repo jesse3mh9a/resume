@@ -10,6 +10,7 @@ import {
   addResume,
   removeResume,
   update,
+  initAction,
 } from "Provider";
 
 import useInitResume from "hooks/useInitResume";
@@ -54,7 +55,13 @@ const DataManage = () => {
         visible={removeAllConfirm}
         onCancel={() => setRemoveAllConfirm(false)}
         onOk={() => {
+          localStorage.clear();
+
+          dispatch(initAction());
+
+          // hook/useInitResume
           dispatch(update({ resumes: [] }));
+
           setRemoveAllConfirm(false);
         }}
       />

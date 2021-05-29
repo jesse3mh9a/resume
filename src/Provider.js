@@ -1,13 +1,11 @@
 import { createContext, useReducer } from "react";
 import produce from "immer";
 
-import Templates from "Templates";
+import { initialConfigById, changeFromPropChain } from "utils/resumeConfig";
 
 import Storage from "utils/storage";
 
-import createGenId from "utils/createGenId";
-
-const genKey = createGenId();
+import genKey from "utils/genKey";
 
 export const storage = new Storage("data");
 
@@ -61,14 +59,6 @@ const initSection = {
   }),
 };
 
-// initial config
-export const config = Templates.reduce((acc, { id, theme = {} }) => {
-  return {
-    ...acc,
-    [id]: { theme },
-  };
-}, {});
-
 export const initialState = {
   currentResume: 0,
 
@@ -80,11 +70,12 @@ export const initialState = {
 
   templateId: 1,
 
-  config,
+  config: initialConfigById,
 };
 
 // constants
 const SET_CURRENT_RESUME = "SET_CURRENT_RESUME";
+const INIT = "INIT";
 const UPDATE = "UPDATE";
 const TOGGLE = "TOGGLE";
 const UPDATE_RESUME = "UPDATE_RESUME";
@@ -96,12 +87,20 @@ const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 const ADD_RESUME = "ADD_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
-const SET_CURRENT_THEME = "SET_CURRENT_THEME";
+const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
+const SET_CURRENT_CONFIG_WITH_CHAIN = "SET_CURRENT_CONFIG_WITH_CHAIN";
+const ADD_CURRENT_CONFIG_SECTION = "ADD_CURRENT_CONFIG_SECTION";
+const REMOVE_CURRENT_CONFIG_SECTION = "REMOVE_CURRENT_CONFIG_SECTION";
 // constants end
 
 // actions
 export const resumeOnChange = (payload) => ({
   type: SET_CURRENT_RESUME,
+  payload,
+});
+
+export const initAction = (payload) => ({
+  type: INIT,
   payload,
 });
 
@@ -149,8 +148,23 @@ export const removeSectionItem = (payload) => ({
   payload,
 });
 
-export const setCurrentTheme = (payload) => ({
-  type: SET_CURRENT_THEME,
+export const setCurrentConfig = (payload) => ({
+  type: SET_CURRENT_CONFIG,
+  payload,
+});
+
+export const setCurrentConfigWithChain = (payload) => ({
+  type: SET_CURRENT_CONFIG_WITH_CHAIN,
+  payload,
+});
+
+export const addCurrentConfigSection = (payload) => ({
+  type: ADD_CURRENT_CONFIG_SECTION,
+  payload,
+});
+
+export const removeCurrentConfigSection = (payload) => ({
+  type: REMOVE_CURRENT_CONFIG_SECTION,
   payload,
 });
 
@@ -171,6 +185,10 @@ const reducer = (state, action) => {
     [SET_CURRENT_RESUME]: {
       ...state,
       currentResume: action.payload,
+    },
+
+    [INIT]: () => {
+      return init(initialState);
     },
 
     [UPDATE]: {
@@ -247,13 +265,42 @@ const reducer = (state, action) => {
       });
     },
 
-    [SET_CURRENT_THEME]: () => {
+    [SET_CURRENT_CONFIG]: () => {
+      const [prop, value] = action.payload;
+
       return produce(state, (product) => {
-        const current = product.config[templateId].theme;
-        product.config[templateId].theme = {
+        const current = product.config[templateId][prop];
+        product.config[templateId][prop] = {
           ...current,
-          ...action.payload,
+          ...value,
         };
+      });
+    },
+
+    [SET_CURRENT_CONFIG_WITH_CHAIN]: () => {
+      const { chain, value } = action.payload;
+      return produce(state, (product) => {
+        changeFromPropChain(product.config[templateId], chain, value);
+      });
+    },
+
+    [ADD_CURRENT_CONFIG_SECTION]: () => {
+      const [prop, initailValue] = action.payload;
+      return produce(state, (product) => {
+        product.config[templateId].section[prop].push({
+          key: genKey(),
+          ...initailValue,
+        });
+      });
+    },
+
+    [REMOVE_CURRENT_CONFIG_SECTION]: () => {
+      const [prop, key] = action.payload;
+      return produce(state, (product) => {
+        const current = product.config[templateId].section[prop];
+        product.config[templateId].section[prop] = current.filter(
+          ({ key: search }) => search !== key
+        );
       });
     },
   };

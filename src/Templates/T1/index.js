@@ -1,17 +1,28 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import useTheme from "hooks/useTheme";
+import { useConfigPreview } from "hooks/useConfig";
 
 import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
 import AddressIcon from "icons/Address";
 import GithubIcon from "icons/Github";
-// import Website from "icons/Website";
+import WebsiteNormalIcon from "icons/Website";
 import config from "./config";
 import styles from "./index.module.css";
 
 import avatarMale from "./avatar-male.png";
-// import avatarFemale from "./avatar-female.png";
+import avatarFemale from "./avatar-female.png";
+
+const AVATAR = {
+  male: avatarMale,
+  female: avatarFemale,
+};
+
+const WEBSITE_ICON = {
+  website: WebsiteNormalIcon,
+  github: GithubIcon,
+};
 
 const cx = classNames.bind(styles);
 
@@ -24,13 +35,17 @@ const Template = () => {
   } = usePreview();
 
   const { primary } = useTheme(config);
+  const { general = {}, section: { skills = [] } = {} } =
+    useConfigPreview(config);
+
+  const WebSiteIcon = WEBSITE_ICON[general.website];
 
   return (
     <div className={cx("container")}>
       <div className={cx("base-info")}>
         <div
           className={cx("avatar")}
-          style={{ backgroundImage: `url(${avatarMale})` }}
+          style={{ backgroundImage: `url(${AVATAR[general.avatar]})` }}
         ></div>
         <div className={cx("base-info-side")}>
           <div className={cx("full-name")}>{fullName}</div>
@@ -53,9 +68,27 @@ const Template = () => {
             <div className={cx("info")}>{address}</div>
           </div>
           <div className={cx("item")}>
-            <GithubIcon className={cx("icon")} style={{ fill: primary }} />
+            <WebSiteIcon className={cx("icon")} style={{ fill: primary }} />
             <div className={cx("info")}>{website}</div>
           </div>
+        </div>
+      </div>
+      <div>
+        <div style={{ color: primary }} className={cx("section-title")}>
+          技能
+        </div>
+        <div className={cx("skills")}>
+          {skills.map((item, i) => {
+            return (
+              <div
+                key={i}
+                style={{ backgroundColor: primary }}
+                className={cx("skills-item")}
+              >
+                {item.name}
+              </div>
+            );
+          })}
         </div>
       </div>
       <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>

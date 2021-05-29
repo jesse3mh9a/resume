@@ -1,11 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, toggle, setCurrentTheme } from "Provider";
+import { Context, DispatchContext, toggle, setCurrentConfig } from "Provider";
+import {
+  Context as EditContext,
+  Dispatch as EditDispatch,
+  toggleDrawerVisible,
+} from "../Provider";
 
-import useConfigValueById from "hooks/useConfigValueById";
+import { useCurConfig, useCurContextConfig } from "hooks/useConfig";
 
+import Section from "./Section";
 import colors from "./colors";
 
 const cx = classNames.bind(styles);
@@ -28,14 +34,14 @@ const onCloseEvent = (onClose) => ({
 });
 
 const Drawer = ({ classes = {}, persist = false }) => {
-  const [visible, setVisible] = useState(false);
-
-  const {
-    value: { theme },
-    initialValue: { theme: initialTheme },
-  } = useConfigValueById();
+  const { drawerVisible: visible } = useContext(EditContext);
+  const editDispatch = useContext(EditDispatch);
 
   const { enableDemo, simulateA4 } = useContext(Context);
+
+  const { theme: initialTheme } = useCurConfig();
+
+  const { theme } = useCurContextConfig();
 
   const dispatch = useContext(DispatchContext);
 
@@ -45,7 +51,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   useEffect(() => {
     const onClose = () => {
-      setVisible(false);
+      editDispatch(toggleDrawerVisible(false));
     };
 
     // noop close
@@ -59,7 +65,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
     return () => {
       close.remove();
     };
-  }, [visible]);
+  }, [visible, editDispatch]);
 
   const ColorPicker = ({ type }) =>
     initialTheme[type] ? (
@@ -73,14 +79,21 @@ const Drawer = ({ classes = {}, persist = false }) => {
                 type="color"
                 value={theme[type]}
                 onChange={(e) =>
-                  dispatch(setCurrentTheme({ [type]: e.target.value }))
+                  dispatch(
+                    setCurrentConfig(["theme", { [type]: e.target.value }])
+                  )
                 }
               />
               {initialTheme[type] !== theme[type] && (
                 <div
                   className={cx("reset-color")}
                   onClick={() =>
-                    dispatch(setCurrentTheme({ [type]: initialTheme[type] }))
+                    dispatch(
+                      setCurrentConfig([
+                        "theme",
+                        { [type]: initialTheme[type] },
+                      ])
+                    )
                   }
                 >
                   reset
@@ -98,7 +111,9 @@ const Drawer = ({ classes = {}, persist = false }) => {
                 className={cx("color-block", {
                   checked: theme[type] === value,
                 })}
-                onClick={() => dispatch(setCurrentTheme({ [type]: value }))}
+                onClick={() =>
+                  dispatch(setCurrentConfig(["theme", { [type]: value }]))
+                }
               />
             ))}
           </div>
@@ -109,35 +124,43 @@ const Drawer = ({ classes = {}, persist = false }) => {
   return (
     <div className={cx("content", classes.root, { visible, persist })}>
       <div className={cx("layer")} />
-      <form className={cx("form")} onClick={stopOnClosePropagation}>
-        <div className={cx("draw-btn")} onClick={() => setVisible(!visible)}>
-          <span className={cx("arrow", { left: !visible, right: visible })} />
-        </div>
-        <div className={cx("form-item")}>
-          <label className={cx("label")}>preview Demo</label>
-          <div className={cx("input-control")}>
-            <Switch
-              checked={enableDemo}
-              onChange={() => {
-                dispatch(toggle(["enableDemo"]));
-              }}
-            />
+      <div className={cx("side")}>
+        <form className={cx("form")} onClick={stopOnClosePropagation}>
+          <div
+            className={cx("draw-btn")}
+            onClick={() => editDispatch(toggleDrawerVisible())}
+          >
+            <span className={cx("arrow", { left: !visible, right: visible })} />
           </div>
-        </div>
-        <div className={cx("form-item")}>
-          <label className={cx("label")}>Simulate A4 page printing view</label>
-          <div className={cx("input-control")}>
-            <Switch
-              checked={simulateA4}
-              onChange={() => {
-                dispatch(toggle(["simulateA4"]));
-              }}
-            />
+          <div className={cx("form-item")}>
+            <label className={cx("label")}>preview Demo</label>
+            <div className={cx("input-control")}>
+              <Switch
+                checked={enableDemo}
+                onChange={() => {
+                  dispatch(toggle(["enableDemo"]));
+                }}
+              />
+            </div>
           </div>
-        </div>
-        <ColorPicker type="primary" />
-        <ColorPicker type="secondary" />
-      </form>
+          <div className={cx("form-item")}>
+            <label className={cx("label")}>
+              Simulate A4 page printing view
+            </label>
+            <div className={cx("input-control")}>
+              <Switch
+                checked={simulateA4}
+                onChange={() => {
+                  dispatch(toggle(["simulateA4"]));
+                }}
+              />
+            </div>
+          </div>
+          <ColorPicker type="primary" />
+          <ColorPicker type="secondary" />
+          <Section />
+        </form>
+      </div>
     </div>
   );
 };
