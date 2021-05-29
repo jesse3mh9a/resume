@@ -93,24 +93,28 @@ const GroupWrap = ({ multiple, name, group, label, count = 0, children }) => {
   );
 };
 
-const MultipleWrap = ({ children, removeOptions }) => {
+const MultipleWrap = ({ children, multiple, removeOptions }) => {
   const dispatch = useContext(DispatchContext);
 
-  return (
-    <div className={cx("multiple")}>
-      {children}
-      <div className={cx("remove")}>
-        <button
-          type="button"
-          onClick={() => {
-            dispatch(removeCurrentConfigSection(removeOptions));
-          }}
-        >
-          Remove
-        </button>
+  if (multiple) {
+    return (
+      <div className={cx("multiple")}>
+        {children}
+        <div className={cx("remove")}>
+          <button
+            type="button"
+            onClick={() => {
+              dispatch(removeCurrentConfigSection(removeOptions));
+            }}
+          >
+            Remove
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  return children;
 };
 
 const ControlRender = (props) => {
@@ -128,7 +132,11 @@ const ControlRender = (props) => {
           {valArr.map((val, i) => {
             const chain = [name, ...(multiple ? [i] : [])];
             return (
-              <MultipleWrap key={val.key || i} removeOptions={[name, val.key]}>
+              <MultipleWrap
+                key={val.key || i}
+                multiple={multiple}
+                removeOptions={[name, val.key]}
+              >
                 <ControlRender
                   {...props}
                   list={group.map((sub) => {
