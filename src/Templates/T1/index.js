@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
-import useTheme from "hooks/useTheme";
+import createTheme from "createTheme";
 import { useConfigPreview } from "hooks/useConfig";
 
 import PhoneIcon from "icons/Phone";
@@ -28,6 +28,8 @@ const cx = classNames.bind(styles);
 
 const formatDate = (time) => time.replace(/-/g, "/");
 
+const Theme = createTheme(config);
+
 const Template = () => {
   const {
     personalDetails: { fullName, phone, email, profession, address, website },
@@ -36,7 +38,6 @@ const Template = () => {
     education = [],
   } = usePreview();
 
-  const { primary } = useTheme(config);
   const { general = {}, section: { skills = [] } = {} } =
     useConfigPreview(config);
 
@@ -58,44 +59,40 @@ const Template = () => {
       <div className={cx("bar-wrap", "mt")}>
         <div className={cx("bar")}>
           <div className={cx("item")}>
-            <PhoneIcon className={cx("icon")} style={{ fill: primary }} />
+            <Theme component={PhoneIcon} className={cx("icon")} type="fill" />
             <div className={cx("info")}>{phone}</div>
           </div>
           <div className={cx("item")}>
-            <EmailIcon className={cx("icon")} style={{ fill: primary }} />
+            <Theme component={EmailIcon} className={cx("icon")} type="fill" />
             <div className={cx("info")}>{email}</div>
           </div>
           <div className={cx("item")}>
-            <AddressIcon className={cx("icon")} style={{ fill: primary }} />
+            <Theme component={AddressIcon} type="fill" className={cx("icon")} />
             <div className={cx("info")}>{address}</div>
           </div>
           <div className={cx("item")}>
-            <WebSiteIcon className={cx("icon")} style={{ fill: primary }} />
+            <Theme component={WebSiteIcon} type="fill" className={cx("icon")} />
             <div className={cx("info")}>{website}</div>
           </div>
         </div>
       </div>
       <div>
-        <div style={{ color: primary }} className={cx("section-title")}>
-          技能
-        </div>
+        <Theme className={cx("section-title")}>技能</Theme>
         <div className={cx("skills")}>
           {skills.map((item, i) => {
             return (
-              <div
+              <Theme
                 key={i}
-                style={{ backgroundColor: primary }}
                 className={cx("skills-item")}
+                type="backgroundColor"
               >
                 {item.name}
-              </div>
+              </Theme>
             );
           })}
         </div>
       </div>
-      <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>
-        工作经历
-      </div>
+      <Theme className={cx("section-title", "mt-lg")}>工作经历</Theme>
       <div>
         {experience.map(
           ({ key, companyName, jobTitle, startDate, endDate, description }) => {
@@ -112,9 +109,7 @@ const Template = () => {
           }
         )}
       </div>
-      <div style={{ color: primary }} className={cx("section-title", "mt-lg")}>
-        教育
-      </div>
+      <Theme className={cx("section-title", "mt-lg")}>教育</Theme>
       <div>
         {education.map(
           ({ key, schoolName, startDate, endDate, description }) => {

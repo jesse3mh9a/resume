@@ -106,12 +106,13 @@ const GroupWrap = ({ multiple, name, group, label, count = 0, children }) => {
   );
 };
 
-const MultipleWrap = ({ children, multiple, removeOptions }) => {
+const MultipleWrap = ({ children, multiple, multipleIndex, removeOptions }) => {
   const dispatch = useContext(DispatchContext);
 
   if (multiple) {
     return (
       <div className={cx("multiple")}>
+        <div className={cx("multiple-index")}>#{multipleIndex + 1}</div>
         {children}
         <div className={cx("remove")}>
           <button
@@ -148,6 +149,7 @@ const ControlRender = (props) => {
               <MultipleWrap
                 key={val.key || i}
                 multiple={multiple}
+                multipleIndex={i}
                 removeOptions={[name, val.key]}
               >
                 <ControlRender
