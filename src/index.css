@@ -1,6 +1,7 @@
 @media print {
   @page {
-    size: A4 portrait; /* stylelint-disable-line value-keyword-case */
+    /* stylelint-disable-next-line value-keyword-case */
+    size: A4 portrait;
   }
 }
 
