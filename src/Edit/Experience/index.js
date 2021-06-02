@@ -7,6 +7,7 @@ import {
   setSectionItem,
   addSectionItem,
   removeSectionItem,
+  makeOrderSectionItem,
 } from "Provider";
 
 import useInitSection from "hooks/useInitSection";
@@ -64,6 +65,40 @@ const Experience = () => {
           const setFormItem = setForm(i);
           return (
             <form key={key} className={cx("form", "item")}>
+              <div className={cx("order")}>
+                {i > 0 && (
+                  <div
+                    className={cx("order-item")}
+                    onClick={() => {
+                      dispatch(
+                        makeOrderSectionItem({
+                          section: "experience",
+                          index: i,
+                          toward: "up",
+                        })
+                      );
+                    }}
+                  >
+                    <div className={cx("arrow", "up")} />
+                  </div>
+                )}
+                {i < experience.length - 1 && (
+                  <div
+                    className={cx("order-item")}
+                    onClick={() => {
+                      dispatch(
+                        makeOrderSectionItem({
+                          section: "experience",
+                          index: i,
+                          toward: "down",
+                        })
+                      );
+                    }}
+                  >
+                    <div className={cx("arrow", "down")} />
+                  </div>
+                )}
+              </div>
               <div className={cx("form-item")}>
                 <label htmlFor={`company-name-${i}`} className={cx("label")}>
                   Company name

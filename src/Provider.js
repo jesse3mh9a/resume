@@ -83,6 +83,7 @@ const UPDATE_RESUME = "UPDATE_RESUME";
 const SET_SECTION = "SET_SECTION";
 const SET_SECTION_ITEM = "SET_SECTION_ITEM";
 const ADD_SECTION_ITEM = "ADD_SECTION_ITEM";
+const MAKE_ORDER_SECTION_ITEM = "MAKE_ORDER_SECTION_ITEM";
 const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 
 const ADD_RESUME = "ADD_RESUME";
@@ -141,6 +142,11 @@ export const setSectionItem = (payload) => ({
 
 export const addSectionItem = (payload) => ({
   type: ADD_SECTION_ITEM,
+  payload,
+});
+
+export const makeOrderSectionItem = (payload) => ({
+  type: MAKE_ORDER_SECTION_ITEM,
   payload,
 });
 
@@ -263,6 +269,36 @@ const reducer = (state, action) => {
         entries.forEach(([prop, value]) => {
           product.resumes[currentResume][section][index][prop] = value;
         });
+      });
+    },
+
+    [MAKE_ORDER_SECTION_ITEM]: () => {
+      // toward up/down
+      const { section, index, toward } = action.payload;
+
+      const options = {
+        up: -1,
+        down: 1,
+      };
+
+      const towardIndex = index + options[toward];
+
+      const count = state.resumes[currentResume][section].length;
+
+      if (
+        towardIndex === undefined ||
+        towardIndex < 0 ||
+        towardIndex >= count
+      ) {
+        return state;
+      }
+
+      return produce(state, (product) => {
+        const towardTarget = product.resumes[currentResume][section][index];
+        const follow = product.resumes[currentResume][section][towardIndex];
+
+        product.resumes[currentResume][section][index] = follow;
+        product.resumes[currentResume][section][towardIndex] = towardTarget;
       });
     },
 

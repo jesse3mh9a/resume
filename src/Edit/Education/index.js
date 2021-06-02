@@ -5,6 +5,7 @@ import {
   setSectionItem,
   addSectionItem,
   removeSectionItem,
+  makeOrderSectionItem,
 } from "Provider";
 
 import useResume from "hooks/useResume";
@@ -62,6 +63,40 @@ const Education = () => {
           const setFormItem = setForm(i);
           return (
             <form key={key} className={cx("form", "item")}>
+              <div className={cx("order")}>
+                {i > 0 && (
+                  <div
+                    className={cx("order-item")}
+                    onClick={() => {
+                      dispatch(
+                        makeOrderSectionItem({
+                          section: "education",
+                          index: i,
+                          toward: "up",
+                        })
+                      );
+                    }}
+                  >
+                    <div className={cx("arrow", "up")} />
+                  </div>
+                )}
+                {i < education.length - 1 && (
+                  <div
+                    className={cx("order-item")}
+                    onClick={() => {
+                      dispatch(
+                        makeOrderSectionItem({
+                          section: "education",
+                          index: i,
+                          toward: "down",
+                        })
+                      );
+                    }}
+                  >
+                    <div className={cx("arrow", "down")} />
+                  </div>
+                )}
+              </div>
               <div className={cx("form-item")}>
                 <label htmlFor={`school-name-${i}`} className={cx("label")}>
                   School name

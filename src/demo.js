@@ -1,6 +1,6 @@
-import createGenId from "utils/createGenId";
+import simpleGenId from "utils/simpleGenId";
 
-const genKey = createGenId();
+const genKey = simpleGenId();
 
 const DEMO = {
   personalDetails: {
