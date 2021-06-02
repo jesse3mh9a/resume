@@ -103,6 +103,10 @@ const config = {
         degree: 90,
       },
       {
+        name: "bootstrap",
+        degree: 80,
+      },
+      {
         name: "tailwindcss",
         degree: 80,
       },
