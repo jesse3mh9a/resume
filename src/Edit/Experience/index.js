@@ -143,7 +143,7 @@ const Experience = () => {
                   <div className={cx("input-control")}>
                     <input
                       className={cx("input")}
-                      type="date"
+                      type="month"
                       id={`start-date-${i}`}
                       max={endDate}
                       value={startDate}
@@ -158,7 +158,7 @@ const Experience = () => {
                     {" "}
                     <input
                       className={cx("input")}
-                      type="date"
+                      type="month"
                       min={startDate}
                       value={endDate}
                       onChange={(e) => {

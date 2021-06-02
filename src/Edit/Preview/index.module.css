@@ -21,6 +21,16 @@
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -9;
+  transition: 0.3s;
+}
+
+.content:hover .full-screen-icon-wrap {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9;
 }
 
 .full-screen-icon {
