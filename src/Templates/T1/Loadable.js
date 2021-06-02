@@ -1,7 +1,5 @@
-import loadable from "utils/loadable";
-
-const fallback = <div>loading...</div>;
+import defaultLoadable from "defaultLoadable";
 
 export { default as config } from "./config";
 
-export default loadable(() => import("./index"), { fallback });
+export default defaultLoadable(() => import("./index"));
