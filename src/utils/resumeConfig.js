@@ -46,7 +46,7 @@ export const getValue = (list, opt = {}) => {
       return {
         ...acc,
         ...getValue(group, {
-          value: multiple ? [{ key: genKey(), ...val }] : val,
+          value: multiple ? [{ key: genKey(false), ...val }] : val,
           name,
         }),
       };

@@ -1,6 +1,6 @@
-import simpleGenId from "utils/simpleGenId";
+import { nonPersistGenKey } from "utils/genKey";
 
-const genKey = simpleGenId();
+const genKey = () => nonPersistGenKey("demo");
 
 const DEMO = {
   personalDetails: {

@@ -1,10 +1,12 @@
-const simpleGenId = () => {
+const simpleGenId = (prefix = "") => {
   let id = 0;
 
-  return () => {
+  return (addPrefix = "") => {
     id += 1;
 
-    return `${id}`;
+    const arr = [prefix, addPrefix].filter((item) => item);
+
+    return [...arr, `${id}`].join("-");
   };
 };
 

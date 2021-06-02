@@ -13,8 +13,8 @@ const init = (value) => {
   return storage.value ? { ...value, ...storage.value } : value;
 };
 
-const initResume = () => ({
-  key: genKey(),
+const initResume = (persist = true) => ({
+  key: genKey(persist),
   name: "",
   createTime: "",
   updateTime: "",
@@ -67,7 +67,7 @@ export const initialState = {
 
   enableDemo: false,
 
-  resumes: [initResume()],
+  resumes: [initResume(false)],
 
   templateId: 1,
 
