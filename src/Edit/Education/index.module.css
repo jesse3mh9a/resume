@@ -11,6 +11,13 @@
   overflow: hidden;
 }
 
+.multiple-index {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+  color: purple;
+}
+
 .order {
   display: none;
   flex-direction: column;

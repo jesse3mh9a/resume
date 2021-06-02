@@ -97,6 +97,7 @@ const Education = () => {
                   </div>
                 )}
               </div>
+              <div className={cx("multiple-index")}>#{i + 1}</div>
               <div className={cx("form-item")}>
                 <label htmlFor={`school-name-${i}`} className={cx("label")}>
                   School name

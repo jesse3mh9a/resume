@@ -99,6 +99,7 @@ const Experience = () => {
                   </div>
                 )}
               </div>
+              <div className={cx("multiple-index")}>#{i + 1}</div>
               <div className={cx("form-item")}>
                 <label htmlFor={`company-name-${i}`} className={cx("label")}>
                   Company name
