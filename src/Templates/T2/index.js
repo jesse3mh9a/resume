@@ -99,7 +99,7 @@ const Template = () => {
             </div>
             <div className={cx("right")}>
               <div className={cx("title")}>工作经验</div>
-              <div className={cx("list-wrap", "mt")}>
+              <div className={cx("list-wrap")}>
                 <div className={cx("line")} />
                 <div className={cx("list")}>
                   {experience.map((exp) => {
@@ -126,7 +126,7 @@ const Template = () => {
                 </div>
               </div>
               <div className={cx("title", "mt-lg")}>教育背景</div>
-              <div className={cx("list-wrap", "mt")}>
+              <div className={cx("list-wrap")}>
                 <div className={cx("line")} />
                 <div className={cx("list")}>
                   {education.map((edu) => {

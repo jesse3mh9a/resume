@@ -159,10 +159,10 @@
 }
 
 .circle {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  transform: translateX(-13px);
+  transform: translateX(-14px);
 }
 
 .item-title {
