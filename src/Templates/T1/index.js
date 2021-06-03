@@ -11,8 +11,8 @@ import WebsiteNormalIcon from "icons/Website";
 import config from "./config";
 import styles from "./index.module.css";
 
-import avatarMale from "./avatar-male.png";
-import avatarFemale from "./avatar-female.png";
+import avatarMale from "images/avatar-male.png";
+import avatarFemale from "images/avatar-female.png";
 
 const AVATAR = {
   male: avatarMale,
@@ -32,7 +32,14 @@ const Theme = createTheme(config);
 
 const Template = () => {
   const {
-    personalDetails: { fullName, phone, email, profession, address, website },
+    personalDetails: {
+      fullName,
+      phone,
+      email,
+      profession,
+      address,
+      website,
+    } = {},
     summary,
     experience = [],
     education = [],
