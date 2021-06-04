@@ -104,7 +104,7 @@ const Template = () => {
                 <div className={cx("list")}>
                   {experience.map((exp) => {
                     return (
-                      <div key={exp.key} className={cx("item", "mt")}>
+                      <div key={exp.key} className={cx("item")}>
                         <div className={cx("item-head")}>
                           <Theme
                             type="backgroundColor"
@@ -131,7 +131,7 @@ const Template = () => {
                 <div className={cx("list")}>
                   {education.map((edu) => {
                     return (
-                      <div key={edu.key} className={cx("item", "mt")}>
+                      <div key={edu.key} className={cx("item")}>
                         <div className={cx("item-head")}>
                           <Theme
                             type="backgroundColor"
