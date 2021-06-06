@@ -45,9 +45,23 @@
 }
 
 .content {
+  position: relative;
   border-radius: 3px;
   background-color: #fff;
-  box-shadow: 0 -5px 3px rgba(0, 0, 0, 0.2);
+}
+
+.content::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 200mm;
+  z-index: -1;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-top: -1px;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), transparent);
 }
 
 .head {
