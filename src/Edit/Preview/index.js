@@ -10,10 +10,6 @@ import {
   setFullScreen,
 } from "Edit/Provider";
 
-import FrontScale from "components/FrontScale";
-
-import useFrontScale from "hooks/useFrontScale";
-
 import Drawer from "../Drawer";
 
 const cx = classNames.bind(styles);
@@ -25,8 +21,6 @@ const Preview = ({ classes = {}, children }) => {
 
   const editDispatch = useContext(EditDispatch);
 
-  const frontScale = useFrontScale();
-
   useEffect(() => {
     if (drawerVisible) {
       ref.current.scroll(0, 0);
@@ -36,8 +30,7 @@ const Preview = ({ classes = {}, children }) => {
   }, [drawerVisible]);
 
   return (
-    <div className={cx(classes.root)} style={{ fontSize: `${frontScale}rem` }}>
-      <FrontScale />
+    <div className={cx(classes.root)}>
       <div className={cx("content", classes.paper)} ref={ref}>
         <div
           className={cx("full-screen-icon-wrap")}
