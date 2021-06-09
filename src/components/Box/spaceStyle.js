@@ -1,4 +1,4 @@
-const max = 20;
+export const MAX = 20;
 
 const mixinArr = (param) => {
   if (Array.isArray(param)) {
@@ -44,7 +44,7 @@ export const excludeSpaceProps = (props) => {
 };
 
 const calcValue = ({ value, edge, spacing }) => {
-  return `${value + (edge * spacing) / max}em`;
+  return `${value + (edge * spacing) / MAX}em`;
 };
 
 const setValue = (s, options) => {
