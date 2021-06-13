@@ -93,6 +93,26 @@ const setDirectionMapping = (name) => {
   };
 };
 
+const spacingCoord = (spacing, name) => {
+  if (spacing?.x) {
+    if (["x", "l", "r"].indexOf(name) !== -1) {
+      return spacing.x;
+    }
+
+    return 0;
+  }
+
+  if (spacing?.y) {
+    if (["y", "t", "b"].indexOf(name) !== -1) {
+      return spacing.y;
+    }
+
+    return 0;
+  }
+
+  return spacing;
+};
+
 const spaceStyle = (props, { name, edge, spacing }) => {
   return Object.entries(props)
     .filter(([prop]) => setDirection(name).indexOf(prop) !== -1)
@@ -102,7 +122,7 @@ const spaceStyle = (props, { name, edge, spacing }) => {
         ...setValue(setDirectionMapping(name)[prop], {
           value,
           edge,
-          spacing,
+          spacing: spacingCoord(spacing, prop.slice(1)),
           name,
         }),
       };
