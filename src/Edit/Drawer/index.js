@@ -2,7 +2,13 @@ import { useContext, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./index.module.css";
 import Switch from "components/Switch";
-import { Context, DispatchContext, toggle, setCurrentConfig } from "Provider";
+import {
+  Context,
+  DispatchContext,
+  toggle,
+  setCurrentConfig,
+  setCurrentSpace,
+} from "Provider";
 import {
   Context as EditContext,
   Dispatch as EditDispatch,
@@ -11,10 +17,27 @@ import {
 
 import { useCurConfig, useCurContextConfig } from "hooks/useConfig";
 
+import { MAX } from "components/Box/spaceStyle";
+
 import Section from "./Section";
 import colors from "./colors";
 
 const cx = classNames.bind(styles);
+
+const fontSpaceOptions = [
+  {
+    value: 0.8,
+    label: "small",
+  },
+  {
+    value: 1,
+    label: "medium",
+  },
+  {
+    value: 1.2,
+    label: "large",
+  },
+];
 
 export const mergeColors = (color) => {
   const exist = colors.some(({ value }) => value === color);
@@ -41,7 +64,7 @@ const Drawer = ({ classes = {}, persist = false }) => {
 
   const { theme: initialTheme } = useCurConfig();
 
-  const { theme } = useCurContextConfig();
+  const { theme, space } = useCurContextConfig();
 
   const dispatch = useContext(DispatchContext);
 
@@ -158,6 +181,38 @@ const Drawer = ({ classes = {}, persist = false }) => {
           </div>
           <ColorPicker type="primary" />
           <ColorPicker type="secondary" />
+          <div className={cx("form-item")}>
+            <label className={cx("label")}>Font space</label>
+            <div className={cx("input-control")}>
+              <select
+                className={cx("input")}
+                value={space.font}
+                onChange={(e) => {
+                  dispatch(setCurrentSpace(["font", e.target.value]));
+                }}
+              >
+                {fontSpaceOptions.map(({ value, label }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className={cx("form-item")}>
+            <label className={cx("label")}>Font space</label>
+            <div className={cx("input-control")}>
+              <input
+                type="range"
+                min="0"
+                max={MAX}
+                value={space.edge}
+                onChange={(e) => {
+                  dispatch(setCurrentSpace(["edge", e.target.value]));
+                }}
+              />
+            </div>
+          </div>
           <Section />
         </form>
       </div>

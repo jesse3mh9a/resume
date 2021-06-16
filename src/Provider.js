@@ -93,6 +93,8 @@ const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
 const SET_CURRENT_CONFIG_WITH_CHAIN = "SET_CURRENT_CONFIG_WITH_CHAIN";
 const ADD_CURRENT_CONFIG_SECTION = "ADD_CURRENT_CONFIG_SECTION";
 const REMOVE_CURRENT_CONFIG_SECTION = "REMOVE_CURRENT_CONFIG_SECTION";
+
+const SET_CURRENT_SPACE = "SET_CURRENT_SPACE";
 // constants end
 
 // actions
@@ -175,6 +177,11 @@ export const removeCurrentConfigSection = (payload) => ({
   payload,
 });
 
+export const setCurrentSpace = (payload) => ({
+  type: SET_CURRENT_SPACE,
+  payload,
+});
+
 // actions end
 
 const mixin = (value, defaultValue) => {
@@ -200,7 +207,9 @@ const reducer = (state, action) => {
 
     [UPDATE]: {
       ...state,
-      ...action.payload,
+      ...(typeof action.payload === "function"
+        ? action.payload(state)
+        : action.payload),
     },
 
     [TOGGLE]: () => {
@@ -338,6 +347,13 @@ const reducer = (state, action) => {
         product.config[templateId].section[prop] = current.filter(
           ({ key: search }) => search !== key
         );
+      });
+    },
+
+    [SET_CURRENT_SPACE]: () => {
+      const [prop, value] = action.payload;
+      return produce(state, (product) => {
+        product.config[templateId].space[prop] = value;
       });
     },
   };

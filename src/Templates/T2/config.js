@@ -7,7 +7,6 @@ const config = {
 
   theme: {
     primary: "#2196f3",
-    // secondary: "pink",
   },
 
   general: [

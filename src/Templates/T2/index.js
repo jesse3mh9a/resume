@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
-import createTheme from "createTheme";
+import createBox from "createBox";
 import { useConfigPreview } from "hooks/useConfig";
 import config from "./config";
 import styles from "./index.module.css";
@@ -11,7 +11,7 @@ import avatarFemale from "images/avatar-female.png";
 
 const cx = classNames.bind(styles);
 
-const Theme = createTheme(config);
+const Box = createBox(config);
 
 const AVATAR = {
   male: avatarMale,
@@ -48,112 +48,129 @@ const Template = () => {
                 style={{ backgroundImage: `url(${AVATAR[general.avatar]})` }}
               />
               <div className={cx("avatar-hold")} />
-              <div className={cx("full-name")}>{fullName}</div>
-              <Theme type="backgroundColor" className={cx("profession")}>
+              <Box typography="head">{fullName}</Box>
+              <Box
+                variant="backgroundColor"
+                className={cx("profession")}
+                px={0.5}
+                py={0.3}
+                mt={1}
+              >
                 {profession}
-              </Theme>
+              </Box>
             </div>
           </div>
-          <div className={cx("side")}>
+          <Box className={cx("side")} p={1} mt={1} spacing={1}>
             <div className={cx("left")}>
-              <div className={cx("title")}>关于我</div>
-              <div className={cx("summary")}>{summary}</div>
-              <div className={cx("title", "mt-lg")}>我的技能</div>
+              <Box typography="title">关于我</Box>
+              <Box mt={1}>{summary}</Box>
+              <Box spacing={1} typography="title" mt={2}>
+                我的技能
+              </Box>
               <div>
                 {skills.map((skill, i) => {
                   return (
-                    <div key={i} className={cx("skills-item")}>
+                    <Box
+                      key={i}
+                      className={cx("skills-item")}
+                      mt={1}
+                      spacing={{ y: 8 }}
+                    >
                       <div className={cx("skills-name")}>{skill.name}</div>
-                      <Theme
-                        type="borderColor"
+                      <Box
+                        variant="borderColor"
                         className={cx("skills-rogress")}
                       >
-                        <Theme
-                          type="backgroundColor"
+                        <Box
+                          variant="backgroundColor"
                           style={{
                             width: `${skill.degree}%`,
                           }}
                         />
-                      </Theme>
-                    </div>
+                      </Box>
+                    </Box>
                   );
                 })}
               </div>
-              <div className={cx("mt-lg")}>
-                <Theme className={cx("info-label")}>Phone</Theme>
-                <div className={cx("info")}>{phone}</div>
+              <Box typography="subtitle" color="primary" mt={2}>
+                Phone
+              </Box>
+              <div spacing={2} typography="subtitle" className={cx("info")}>
+                {phone}
               </div>
-              <div className={cx("mt-lg")}>
-                <Theme className={cx("info-label")}>Email</Theme>
-                <div className={cx("info")}>{email}</div>
-              </div>
-
-              <div className={cx("mt-lg")}>
-                <Theme className={cx("info-label")}>Address</Theme>
-                <div className={cx("info")}>{address}</div>
-              </div>
-              <div className={cx("mt-lg")}>
-                <Theme className={cx("info-label")}>{general.website}</Theme>
-                <div className={cx("info")}>{website}</div>
-              </div>
+              <Box spacing={2} typography="subtitle" color="primary" mt={1}>
+                Email
+              </Box>
+              <div className={cx("info")}>{email}</div>
+              <Box spacing={2} typography="subtitle" color="primary" mt={1}>
+                Address
+              </Box>
+              <div className={cx("info")}>{address}</div>
+              <Box spacing={2} typography="subtitle" color="primary" mt={1}>
+                {general.website}
+              </Box>
+              <div className={cx("info")}>{website}</div>
             </div>
             <div className={cx("right")}>
-              <div className={cx("title")}>工作经验</div>
-              <div className={cx("list-wrap")}>
-                <div className={cx("line")} />
-                <div className={cx("list")}>
-                  {experience.map((exp) => {
-                    return (
-                      <div key={exp.key} className={cx("item")}>
+              <Box typography="title">工作经验</Box>
+              <Box className={cx("list")} mt={2}>
+                {experience.map((exp, index) => {
+                  return (
+                    <Box
+                      key={exp.key}
+                      className={cx("item")}
+                      mt={index === 0 ? 0 : 2}
+                    >
+                      <Box variant="backgroundColor" className={cx("circle")} />
+                      <Box className={cx("item-content")} ml={1}>
                         <div className={cx("item-head")}>
-                          <Theme
-                            type="backgroundColor"
-                            className={cx("circle")}
-                          />
-                          <Theme className={cx("title")}>
+                          <Box color="primary" typography="title">
                             {exp.companyName}
-                          </Theme>
-                          <div className={cx("mx-sm")}>/</div>
-                          <div className={cx("mt-sm")}>{exp.jobTitle}</div>
+                          </Box>
+                          <Box ml={1}>{exp.jobTitle}</Box>
                         </div>
-                        <div className={cx("mt-sm")}>
+                        <Box mt={0.5}>
                           {exp.startDate} 至 {exp.endDate}
-                        </div>
-                        <div className={cx("mt-sm")}>{exp.description}</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className={cx("title", "mt-lg")}>教育背景</div>
+                        </Box>
+                        <Box mt={0.5}>{exp.description}</Box>
+                      </Box>
+                    </Box>
+                  );
+                })}
+              </Box>
+              <Box typography="title" mt={2}>
+                教育背景
+              </Box>
               <div className={cx("list-wrap")}>
-                <div className={cx("line")} />
-                <div className={cx("list")}>
-                  {education.map((edu) => {
+                <Box className={cx("list")} mt={1}>
+                  {education.map((edu, index) => {
                     return (
-                      <div key={edu.key} className={cx("item")}>
-                        <div className={cx("item-head")}>
-                          <Theme
-                            type="backgroundColor"
-                            className={cx("circle")}
-                          />
-                          <Theme className={cx("title")}>
-                            {edu.schoolName}
-                          </Theme>
-                          <div className={cx("mx-sm")}>/</div>
-                          <div className={cx("mt-sm")}>{edu.jobTitle}</div>
-                        </div>
-                        <div className={cx("mt-sm")}>
-                          {edu.startDate} 至 {edu.endDate}
-                        </div>
-                        <div className={cx("mt-sm")}>{edu.description}</div>
-                      </div>
+                      <Box
+                        key={edu.key}
+                        className={cx("item")}
+                        mt={index === 0 ? 0 : 2}
+                      >
+                        <Box
+                          variant="backgroundColor"
+                          className={cx("circle")}
+                        />
+                        <Box className={cx("item-content")} ml={1}>
+                          <div className={cx("item-head")}>
+                            <Box typography="title">{edu.schoolName}</Box>
+                            <Box ml={1}>{edu.degree}</Box>
+                          </div>
+                          <Box mt={0.5}>
+                            {edu.startDate} 至 {edu.endDate}
+                          </Box>
+                          <Box mt={0.5}>{edu.description}</Box>
+                        </Box>
+                      </Box>
                     );
                   })}
-                </div>
+                </Box>
               </div>
             </div>
-          </div>
+          </Box>
         </div>
       </div>
     </div>

@@ -85,6 +85,10 @@ export const initialConfigById = Templates.reduce(
         theme,
         general: getValue(general),
         section: getValue(section),
+        space: {
+          font: 1,
+          edge: 0,
+        },
       },
     };
   },
