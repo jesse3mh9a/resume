@@ -5,6 +5,8 @@ import classNames from "classnames/bind";
 
 import Templates from "Templates";
 
+import ResumeWrapper from "./ResumeWrapper";
+
 import { Context } from "Provider";
 
 import {
@@ -63,16 +65,18 @@ const Container = () => {
     ({ id }) => templateId === id
   );
 
+  const resumeRender = (
+    <ResumeWrapper>
+      <Resume />
+    </ResumeWrapper>
+  );
+
   if (printMode) {
-    return <Resume />;
+    return resumeRender;
   }
 
   if (fullScreen) {
-    return (
-      <FullScreen>
-        <Resume />
-      </FullScreen>
-    );
+    return <FullScreen>{resumeRender}</FullScreen>;
   }
 
   return (
@@ -104,7 +108,7 @@ const Container = () => {
             paper: cx("paper"),
           }}
         >
-          <Resume />
+          {resumeRender}
         </Preview>
       </div>
     </div>

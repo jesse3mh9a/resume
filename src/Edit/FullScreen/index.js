@@ -10,10 +10,6 @@ import {
   setFullScreen,
 } from "Edit/Provider";
 
-import FrontScale from "components/FrontScale";
-
-import useFrontScale from "hooks/useFrontScale";
-
 import Drawer from "../Drawer";
 
 const cx = classNames.bind(styles);
@@ -23,15 +19,12 @@ const FullScreen = ({ children }) => {
 
   const editDispatch = useContext(EditDispatch);
 
-  const frontScale = useFrontScale();
-
   useEffect(() => {
     document.body.style.overflowY = drawerVisible ? "hidden" : "auto";
   }, [drawerVisible]);
 
   return (
-    <div className={cx("content")} style={{ fontSize: `${frontScale}rem` }}>
-      <FrontScale />
+    <div className={cx("content")}>
       {children}
       <Drawer persist classes={{ root: cx("drawer") }} />
       <div

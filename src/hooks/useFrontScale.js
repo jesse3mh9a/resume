@@ -4,7 +4,7 @@ import { Context as EditContext } from "Edit/Provider";
 
 const useFrontScale = () => {
   const { simulateA4 } = useContext(Context);
-  const { frontScale } = useContext(EditContext);
+  const { frontScale, printMode } = useContext(EditContext);
 
   let debugValue = "A4";
 
@@ -20,7 +20,15 @@ const useFrontScale = () => {
     debugValue = "without simulation of A4";
   }
 
+  if (printMode) {
+    debugValue = "printMode on";
+  }
+
   useDebugValue(debugValue);
+
+  if (printMode) {
+    return 1;
+  }
 
   if (!simulateA4) {
     return 1;

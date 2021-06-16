@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import createTheme from "createTheme";
+import createBox from "createBox";
 import { useConfigPreview } from "hooks/useConfig";
 
 import PhoneIcon from "icons/Phone";
@@ -11,8 +12,8 @@ import WebsiteNormalIcon from "icons/Website";
 import config from "./config";
 import styles from "./index.module.css";
 
-import avatarMale from "./avatar-male.png";
-import avatarFemale from "./avatar-female.png";
+import avatarMale from "images/avatar-male.png";
+import avatarFemale from "images/avatar-female.png";
 
 const AVATAR = {
   male: avatarMale,
@@ -30,9 +31,18 @@ const formatDate = (time) => time.replace(/-/g, "/");
 
 const Theme = createTheme(config);
 
+const Box = createBox(config);
+
 const Template = () => {
   const {
-    personalDetails: { fullName, phone, email, profession, address, website },
+    personalDetails: {
+      fullName,
+      phone,
+      email,
+      profession,
+      address,
+      website,
+    } = {},
     summary,
     experience = [],
     education = [],
@@ -59,11 +69,18 @@ const Template = () => {
       <div className={cx("bar-wrap", "mt")}>
         <div className={cx("bar")}>
           <div className={cx("item")}>
-            <Theme component={PhoneIcon} className={cx("icon")} type="fill" />
+            <Box clone color="primary" variant="fill" className={cx("icon")}>
+              <PhoneIcon />
+            </Box>
             <div className={cx("info")}>{phone}</div>
           </div>
           <div className={cx("item")}>
-            <Theme component={EmailIcon} className={cx("icon")} type="fill" />
+            <Box
+              component={EmailIcon}
+              className={cx("icon")}
+              color="primary"
+              variant="fill"
+            />
             <div className={cx("info")}>{email}</div>
           </div>
           <div className={cx("item")}>
@@ -81,13 +98,14 @@ const Template = () => {
         <div className={cx("skills")}>
           {skills.map((item, i) => {
             return (
-              <Theme
+              <Box
                 key={i}
                 className={cx("skills-item")}
-                type="backgroundColor"
+                color="primary"
+                variant="backgroundColor"
               >
                 {item.name}
-              </Theme>
+              </Box>
             );
           })}
         </div>

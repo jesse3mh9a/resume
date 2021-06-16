@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+}
+
+.page-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.page-footer::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 0;
+  border-right-width: 1px;
+  border-top-width: 1px;
+}
+
+.page-footer::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border-style: solid;
+  border-color: #ddd;
+  border-width: 0;
+  border-left-width: 1px;
+  border-top-width: 1px;
+}
