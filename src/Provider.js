@@ -33,6 +33,8 @@ const initResume = (persist = true) => ({
   education: [],
 
   experience: [],
+
+  project: [],
 });
 
 /**
@@ -54,6 +56,15 @@ const initSection = {
     id: "",
     jobTitle: "",
     companyName: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+  }),
+
+  project: () => ({
+    key: genKey(),
+    id: "",
+    name: "",
     startDate: "",
     endDate: "",
     description: "",

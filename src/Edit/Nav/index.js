@@ -24,11 +24,15 @@ const menus = [
   },
   {
     name: "education",
-    link: "/edit/education",
+    link: "/edit/list/education",
   },
   {
     name: "experience",
-    link: "/edit/experience",
+    link: "/edit/list/experience",
+  },
+  {
+    name: "project",
+    link: "/edit/list/project",
   },
 ];
 

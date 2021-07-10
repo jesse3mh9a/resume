@@ -6,8 +6,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Edit from "Edit";
 import PersonalDetails from "Edit/PersonalDetails/Loadable";
 import Summary from "Edit/Summary/Loadable";
-import Education from "Edit/Education/Loadable";
-import Experience from "Edit/Experience/Loadable";
+import List from "Edit/List/Loadable";
 
 import DataManage from "Edit/DataManage/Loadable";
 
@@ -27,8 +26,7 @@ const Container = () => {
       <Route path="edit" element={<Edit />}>
         <Route path="personal-details" element={<PersonalDetails />} />
         <Route path="summary" element={<Summary />} />
-        <Route path="education" element={<Education />} />
-        <Route path="experience" element={<Experience />} />
+        <Route path="/list/:section" element={<List />} />
         <Route path="/data/manage" element={<DataManage />} />
       </Route>
       <Route path="*" element={<DefaultHome />} />
