@@ -26,6 +26,12 @@ const config = {
       value: "github",
       options: ["website", "github"],
     },
+    {
+      name: "projectHead",
+      label: "project head",
+      control: "text",
+      value: "近期项目",
+    },
   ],
 
   section: [

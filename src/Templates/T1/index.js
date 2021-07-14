@@ -46,6 +46,7 @@ const Template = () => {
     summary,
     experience = [],
     education = [],
+    project = [],
   } = usePreview();
 
   const { general = {}, section: { skills = [] } = {} } =
@@ -142,6 +143,22 @@ const Template = () => {
             );
           }
         )}
+      </div>
+      <Theme className={cx("section-title", "mt-lg")}>
+        {general.projectHead}
+      </Theme>
+      <div>
+        {project.map(({ key, name, startDate, endDate, description }) => {
+          return (
+            <div key={key} className={cx("experience-item", "mt")}>
+              <div>{name}</div>
+              <div className={cx("time", "mt-sm")}>
+                {formatDate(startDate)} - {formatDate(endDate)}
+              </div>
+              <div className={cx("description", "mt-sm")}>{description}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
