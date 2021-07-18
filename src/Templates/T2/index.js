@@ -2,6 +2,7 @@ import classNames from "classnames/bind";
 import { usePreview } from "hooks/useResume";
 import createBox from "createBox";
 import { useConfigPreview } from "hooks/useConfig";
+import formatDate from "utils/formatDate";
 import config from "./config";
 import styles from "./index.module.css";
 import bg from "./images/mountain.jpeg";
@@ -130,7 +131,8 @@ const Template = () => {
                           <Box ml={1}>{exp.jobTitle}</Box>
                         </div>
                         <Box mt={0.5}>
-                          {exp.startDate} 至 {exp.endDate}
+                          {formatDate(exp.startDate)} -{" "}
+                          {formatDate(exp.endDate)}
                         </Box>
                         <Box mt={0.5}>{exp.description}</Box>
                       </Box>
@@ -160,7 +162,8 @@ const Template = () => {
                             <Box ml={1}>{edu.degree}</Box>
                           </div>
                           <Box mt={0.5}>
-                            {edu.startDate} 至 {edu.endDate}
+                            {formatDate(edu.startDate)} 至{" "}
+                            {formatDate(edu.endDate)}
                           </Box>
                           <Box mt={0.5}>{edu.description}</Box>
                         </Box>

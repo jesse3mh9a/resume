@@ -29,14 +29,15 @@ const initialDeleteConfirm = { title: "", id: -1, visible: false };
 
 const control = {
   text: ({ name, value, setFormItem, index }) => {
+    const id = [name, index].join("-");
     return (
       <div className={cx("form-item")}>
-        <label htmlFor={`school-name-${index}`} className={cx("label")}>
+        <label htmlFor={id} className={cx("label")}>
           {name}
         </label>
         <div className={cx("input-control")}>
           <input
-            id={`name-${index}`}
+            id={id}
             className={cx("input")}
             placeholder={""}
             value={value}
@@ -52,17 +53,18 @@ const control = {
   },
 
   range: ({ name, start, end, setFormItem, index }) => {
+    const id = [name, index].join("-");
     return (
       <div className={cx("form-item")}>
-        <label className={cx("label")} htmlFor={`start-date-${index}`}>
+        <label className={cx("label")} htmlFor={id}>
           {name}
         </label>
         <div className={cx("input-control", "multi-input")}>
           <div className={cx("input-control")}>
             <input
+              id={id}
               className={cx("input")}
               type="month"
-              id={`start-date-${index}`}
               max={end.value}
               value={start.value}
               onChange={(e) => {
@@ -89,14 +91,15 @@ const control = {
   },
 
   textarea: ({ name, value, setFormItem, index }) => {
+    const id = [name, index].join("-");
     return (
       <div className={cx("form-item")}>
-        <label htmlFor={`description-${index}`} className={cx("label")}>
+        <label htmlFor={id} className={cx("label")}>
           {name}
         </label>
         <div className={cx("input-control")}>
           <textarea
-            id={`description-${index}`}
+            id={id}
             rows={10}
             className={cx("input", "textarea")}
             placeholder=""

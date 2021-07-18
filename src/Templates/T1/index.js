@@ -4,6 +4,8 @@ import createTheme from "createTheme";
 import createBox from "createBox";
 import { useConfigPreview } from "hooks/useConfig";
 
+import formatDate from "utils/formatDate";
+
 import PhoneIcon from "icons/Phone";
 import EmailIcon from "icons/Email";
 import AddressIcon from "icons/Address";
@@ -26,8 +28,6 @@ const WEBSITE_ICON = {
 };
 
 const cx = classNames.bind(styles);
-
-const formatDate = (time) => time.replace(/-/g, "/");
 
 const Theme = createTheme(config);
 
