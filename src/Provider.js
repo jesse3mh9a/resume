@@ -98,6 +98,7 @@ const MAKE_ORDER_SECTION_ITEM = "MAKE_ORDER_SECTION_ITEM";
 const REMOVE_SECTION_ITEM = "REMOVE_SECTION_ITEM";
 
 const ADD_RESUME = "ADD_RESUME";
+const DUPLICATE_RESUME = "DUPLICATE_RESUME";
 const REMOVE_RESUME = "REMOVE_RESUME";
 
 const SET_CURRENT_CONFIG = "SET_CURRENT_CONFIG";
@@ -136,6 +137,11 @@ export const updateResume = (payload) => ({
 
 export const addResume = () => ({
   type: ADD_RESUME,
+});
+
+export const duplicateResume = (payload) => ({
+  type: DUPLICATE_RESUME,
+  payload,
 });
 
 export const removeResume = (payload) => ({
@@ -243,6 +249,17 @@ const reducer = (state, action) => {
       return {
         ...state,
         resumes: [...state.resumes, initResume()],
+      };
+    },
+
+    [DUPLICATE_RESUME]: () => {
+      const index = action.payload;
+      const data = state.resumes[index];
+      // new key
+      const { key } = initResume();
+      return {
+        ...state,
+        resumes: [...state.resumes, { ...data, key }],
       };
     },
 

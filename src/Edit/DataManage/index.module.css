@@ -84,13 +84,13 @@
   margin-left: 1rem;
 }
 
-.delete-wrap {
+.btn-wrap {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  margin-top: 1em;
 }
 
-.delete {
-  margin-top: 1rem;
+.btn {
   color: #999;
   outline: none;
   border: none;
@@ -98,7 +98,7 @@
   cursor: pointer;
 }
 
-.delete:hover {
+.btn:hover {
   color: purple;
   text-decoration: underline;
 }

@@ -8,6 +8,7 @@ import {
   updateResume,
   resumeOnChange,
   addResume,
+  duplicateResume,
   removeResume,
   update,
   initAction,
@@ -110,22 +111,34 @@ const DataManage = () => {
 
                 <div className={cx("right-side")}>{selected && "✅"}</div>
               </div>
-              <div className={cx("delete-wrap")}>
-                <button
-                  type="button"
-                  className={cx("delete")}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setDeleteConfirm({
-                      title: `Are you sure delete?`,
-                      id: index,
-                      visible: true,
-                    });
-                  }}
-                >
-                  remove
-                </button>
-              </div>
+              {selected && (
+                <div className={cx("btn-wrap")}>
+                  <button
+                    type="button"
+                    className={cx("btn")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      dispatch(duplicateResume(index));
+                    }}
+                  >
+                    duplicate
+                  </button>
+                  <button
+                    type="button"
+                    className={cx("btn")}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeleteConfirm({
+                        title: `Are you sure delete?`,
+                        id: index,
+                        visible: true,
+                      });
+                    }}
+                  >
+                    remove
+                  </button>
+                </div>
+              )}
             </div>
           );
         })}
