@@ -240,8 +240,8 @@ const reducer = (state, action) => {
 
     [UPDATE_RESUME]: () => {
       const [prop, value] = action.payload;
-      return produce(state, (product) => {
-        product.resumes[currentResume][prop] = value;
+      return produce(state, (draft) => {
+        draft.resumes[currentResume][prop] = value;
       });
     },
 
@@ -257,10 +257,13 @@ const reducer = (state, action) => {
       const data = state.resumes[index];
       // new key
       const { key } = initResume();
-      return {
-        ...state,
-        resumes: [...state.resumes, { ...data, key }],
-      };
+
+      return produce(state, (draft) => {
+        draft.resumes.splice(index + 1, 0, {
+          ...data,
+          key,
+        });
+      });
     },
 
     [REMOVE_RESUME]: () => {
@@ -274,25 +277,25 @@ const reducer = (state, action) => {
       const { section, form } = action.payload;
       const entries = Object.entries(form);
 
-      return produce(state, (product) => {
+      return produce(state, (draft) => {
         entries.forEach(([prop, value]) => {
-          product.resumes[currentResume][section][prop] = value;
+          draft.resumes[currentResume][section][prop] = value;
         });
       });
     },
 
     [ADD_SECTION_ITEM]: () => {
       const section = action.payload;
-      return produce(state, (product) => {
-        product.resumes[currentResume][section].push(initSection[section]());
+      return produce(state, (draft) => {
+        draft.resumes[currentResume][section].push(initSection[section]());
       });
     },
 
     [REMOVE_SECTION_ITEM]: () => {
       const { section, index } = action.payload;
-      return produce(state, (product) => {
-        const currentItem = product.resumes[currentResume][section];
-        product.resumes[currentResume][section] = currentItem.filter(
+      return produce(state, (draft) => {
+        const currentItem = draft.resumes[currentResume][section];
+        draft.resumes[currentResume][section] = currentItem.filter(
           (_, search) => index !== search
         );
       });
@@ -302,9 +305,9 @@ const reducer = (state, action) => {
       const { section, index, form } = action.payload;
       const entries = Object.entries(form);
 
-      return produce(state, (product) => {
+      return produce(state, (draft) => {
         entries.forEach(([prop, value]) => {
-          product.resumes[currentResume][section][index][prop] = value;
+          draft.resumes[currentResume][section][index][prop] = value;
         });
       });
     },
@@ -330,21 +333,21 @@ const reducer = (state, action) => {
         return state;
       }
 
-      return produce(state, (product) => {
-        const towardTarget = product.resumes[currentResume][section][index];
-        const follow = product.resumes[currentResume][section][towardIndex];
+      return produce(state, (draft) => {
+        const towardTarget = draft.resumes[currentResume][section][index];
+        const follow = draft.resumes[currentResume][section][towardIndex];
 
-        product.resumes[currentResume][section][index] = follow;
-        product.resumes[currentResume][section][towardIndex] = towardTarget;
+        draft.resumes[currentResume][section][index] = follow;
+        draft.resumes[currentResume][section][towardIndex] = towardTarget;
       });
     },
 
     [SET_CURRENT_CONFIG]: () => {
       const [prop, value] = action.payload;
 
-      return produce(state, (product) => {
-        const current = product.config[templateId][prop];
-        product.config[templateId][prop] = {
+      return produce(state, (draft) => {
+        const current = draft.config[templateId][prop];
+        draft.config[templateId][prop] = {
           ...current,
           ...value,
         };
@@ -353,15 +356,15 @@ const reducer = (state, action) => {
 
     [SET_CURRENT_CONFIG_WITH_CHAIN]: () => {
       const { chain, value } = action.payload;
-      return produce(state, (product) => {
-        changeFromPropChain(product.config[templateId], chain, value);
+      return produce(state, (draft) => {
+        changeFromPropChain(draft.config[templateId], chain, value);
       });
     },
 
     [ADD_CURRENT_CONFIG_SECTION]: () => {
       const [prop, initailValue] = action.payload;
-      return produce(state, (product) => {
-        product.config[templateId].section[prop].push({
+      return produce(state, (draft) => {
+        draft.config[templateId].section[prop].push({
           key: genKey(),
           ...initailValue,
         });
@@ -370,9 +373,9 @@ const reducer = (state, action) => {
 
     [REMOVE_CURRENT_CONFIG_SECTION]: () => {
       const [prop, key] = action.payload;
-      return produce(state, (product) => {
-        const current = product.config[templateId].section[prop];
-        product.config[templateId].section[prop] = current.filter(
+      return produce(state, (draft) => {
+        const current = draft.config[templateId].section[prop];
+        draft.config[templateId].section[prop] = current.filter(
           ({ key: search }) => search !== key
         );
       });
@@ -380,8 +383,8 @@ const reducer = (state, action) => {
 
     [SET_CURRENT_SPACE]: () => {
       const [prop, value] = action.payload;
-      return produce(state, (product) => {
-        product.config[templateId].space[prop] = value;
+      return produce(state, (draft) => {
+        draft.config[templateId].space[prop] = value;
       });
     },
   };
